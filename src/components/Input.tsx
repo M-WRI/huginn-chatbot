@@ -6,7 +6,7 @@ export const Input = ({
   config: {
     value: string;
     setValue: (value: string) => void;
-    getMessages: () => Promise<void>;
+    getMessages: () => any;
   };
 }) => {
   const { value, setValue, getMessages } = config;

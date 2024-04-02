@@ -6,7 +6,7 @@ export const Header = ({
   handleOpenChat,
   handleOpenFullWindowChat,
 }: {
-  handleOpenChat: () => void;
+  handleOpenChat?: () => void;
   handleOpenFullWindowChat: () => void;
 }) => {
   return (

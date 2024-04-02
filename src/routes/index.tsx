@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import { ChatBotFullScreen } from "../screens/ChatBotFullScreen";
 import { Chatbot } from "../screens/Chatbot";
 
 export const router = createBrowserRouter([
@@ -8,6 +9,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/full-screen",
-    element: <Chatbot fullScreen />,
+    element: <ChatBotFullScreen />,
   },
 ]);
