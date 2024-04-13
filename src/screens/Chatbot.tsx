@@ -1,4 +1,3 @@
-import { Header } from "../components/Header";
 import { ChatContainer } from "../components/ChatContainer";
 import { Input } from "../components/Input";
 import { useMessageService } from "../hooks";
@@ -10,19 +9,8 @@ export const Chatbot = () => {
     useMessageService();
   const { chatIsOpen, setChatIsOpen } = useOutletContext<ChatContextType>();
 
-  const handleOpenFullWindowChat = () => {
-    const chatUrl = window.location.origin + "/full-screen";
-    window.open(chatUrl, "_blank");
-  };
-
   return (
     <>
-      <Header
-        handleOpenChat={() =>
-          setChatIsOpen((prevChatIsOpen: boolean) => !prevChatIsOpen)
-        }
-        handleOpenFullWindowChat={handleOpenFullWindowChat}
-      />
       <ChatContainer previousChats={previousChats} isLoading={isLoading} />
       <Input config={{ value, setValue, getMessages }} />
     </>
