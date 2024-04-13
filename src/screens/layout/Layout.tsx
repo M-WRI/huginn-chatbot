@@ -1,10 +1,13 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { ReactComponent as HuginnIcon } from "../../assets/huginn_logo_icon.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
+import { useApiAuth } from "../../hooks";
 
 export const Layout = () => {
   const { pathname } = useLocation();
+  const { checkIsAuth, isAuthenticated } = useApiAuth();
+
   const [chatIsOpen, setChatIsOpen] = useState<boolean>(false);
 
   const path = pathname.split("/")[1];
@@ -18,6 +21,10 @@ export const Layout = () => {
     const chatUrl = window.location.origin + "/full-screen";
     window.open(chatUrl, "_blank");
   };
+
+  useEffect(() => {
+    chatIsOpen && checkIsAuth("1000");
+  }, [chatIsOpen]);
 
   return (
     <div className={`app-container ${path}`}>
