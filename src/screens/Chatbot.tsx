@@ -1,15 +1,8 @@
+import { useOutletContext } from "react-router-dom";
 import { ChatContainer } from "../components/ChatContainer";
-import { Input } from "../components/Input";
-import { useMessageService } from "../hooks";
 
 export const Chatbot = () => {
-  const { previousChats, isLoading, value, setValue, getMessages } =
-    useMessageService();
+  const { previousChats, isLoading } = useOutletContext<any>();
 
-  return (
-    <>
-      <ChatContainer previousChats={previousChats} isLoading={isLoading} />
-      <Input config={{ value, setValue, getMessages }} />
-    </>
-  );
+  return <ChatContainer previousChats={previousChats} isLoading={isLoading} />;
 };

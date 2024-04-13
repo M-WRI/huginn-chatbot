@@ -3,36 +3,32 @@ import { useAuthContext } from "../context";
 import axios from "axios";
 
 export const useApiAuth = () => {
-  const { setAuthState, isAuthenticated } = useAuthContext();
+  const { authState, setAuthState } = useAuthContext();
 
   const { mutate: checkIsAuth } = useMutation(
     async (chatId: string | null) => {
-      console.log(chatId, "<------ chat id");
       const response = await axios.post(`http://localhost:8000/chat/auth/`, {
         chat_id: chatId,
       });
-      console.log(response, "<---- response");
       return response.data;
     },
     {
       onSuccess: (data) => {
-        console.log(data, "<------- data");
         setAuthState({
           authHasBeenTriggered: true,
-          isAuthenticated: true,
-          authMessage: data.message,
+          isError: false,
+          state: data.message,
         });
       },
-      onError: (error) => {
-        console.error(error, "<--------- error");
+      onError: (error: any) => {
         setAuthState({
           authHasBeenTriggered: true,
-          isAuthenticated: false,
-          authMessage: error,
+          isError: true,
+          state: error?.response.data.detail,
         });
       },
     }
   );
 
-  return { checkIsAuth, isAuthenticated };
+  return { checkIsAuth, authState };
 };

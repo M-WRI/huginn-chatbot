@@ -4,8 +4,8 @@ const AuthContext = createContext<any | undefined>(undefined);
 
 const initialValue = {
   authHasBeenTriggered: false,
-  isAuthenticated: false,
-  authMessage: "",
+  isError: false,
+  state: {},
 };
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({

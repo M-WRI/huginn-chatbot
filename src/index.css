@@ -31,6 +31,7 @@ input {
 }
 
 .chatbot-container {
+  position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -54,6 +55,8 @@ input {
 }
 
 .chatbot-header {
+  position: relative;
+  z-index: 15;
   padding: 0 16px 16px 16px;
   margin-bottom: 8px;
   border-bottom: 1px solid #9b9c9f;
@@ -193,5 +196,38 @@ input {
 }
 
 .loading-icon {
-  animation: spin 1s linear infinite; /* Apply the spin animation */
+  animation: spin 1s linear infinite;
+}
+
+/* FUTURE ERROR MODAL THIS IS JUST A PLACEHOLDER FOR NOW */
+.test-modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.test-modal h2,
+.test-modal p {
+  text-shadow: 1px 1px 2px black;
+}
+
+.test-modal h2 {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.test-modal p {
+  font-size: 1.2em;
 }
