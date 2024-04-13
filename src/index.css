@@ -24,6 +24,12 @@ input {
   right: 32px;
 }
 
+.app-container.full-screen {
+  position: unset;
+  bottom: unset;
+  right: unset;
+}
+
 .chatbot-container {
   overflow: hidden;
   display: flex;

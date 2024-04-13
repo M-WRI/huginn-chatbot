@@ -13,10 +13,10 @@ export const ChatBotFullScreen = () => {
   };
 
   return (
-    <div className="chatbot-container full-screen">
+    <>
       <Header handleOpenFullWindowChat={handleOpenFullWindowChat} />
       <ChatContainer previousChats={previousChats} isLoading={isLoading} />
       <Input config={{ value, setValue, getMessages }} />
-    </div>
+    </>
   );
 };
