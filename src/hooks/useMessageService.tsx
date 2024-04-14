@@ -6,13 +6,13 @@ import axios from "axios";
 
 export const useMessageService = () => {
   const { previousChats, setPreviousChats } = useChatContext();
+
   const [value, setValue] = useState<string>("");
-  // const queryClient = useQueryClient();
 
   const sendMessageMutation = useMutation(
     async (messageContent: { role: string; content: string }) => {
       const response = await axios.post(
-        "http://localhost:8000/question/1004",
+        "http://localhost:8000/question/1005",
         {
           messages: [messageContent],
         },
@@ -46,7 +46,6 @@ export const useMessageService = () => {
     sendMessageMutation.mutate({ role: "user", content: value });
   };
 
-  // Correctly using useEffect here
   useEffect(() => {
     localStorage.setItem("previousChats", JSON.stringify(previousChats));
   }, [previousChats]);
