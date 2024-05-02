@@ -10,6 +10,8 @@ import React, {
 import { IMessage } from "../entities";
 
 interface IChatContext {
+  chatId: string | null;
+  setChatId: Dispatch<SetStateAction<string | null>>;
   previousChats: IMessage[];
   setPreviousChats: Dispatch<SetStateAction<IMessage[]>>;
 }
@@ -21,10 +23,18 @@ interface ChatProviderProps {
 const ChatContext = createContext<IChatContext | undefined>(undefined);
 
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
+  const [chatId, setChatId] = useState<string | null>(() => {
+    const storedChatId = localStorage.getItem("chatId");
+    return storedChatId ? storedChatId : null;
+  });
   const [previousChats, setPreviousChats] = useState<IMessage[]>(() => {
     const storedChats = localStorage.getItem("previousChats");
     return storedChats ? JSON.parse(storedChats) : [];
   });
+
+  useEffect(() => {
+    localStorage.setItem("chatId", chatId ?? "");
+  }, [chatId]);
 
   useEffect(() => {
     localStorage.setItem("previousChats", JSON.stringify(previousChats));
@@ -32,7 +42,9 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
-      if (event.key === "previousChats") {
+      if (event.key === "chatId" && event.newValue !== null) {
+        setChatId(event.newValue);
+      } else if (event.key === "previousChats") {
         const newChats = event.newValue ? JSON.parse(event.newValue) : [];
         setPreviousChats(newChats);
       }
@@ -43,7 +55,9 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <ChatContext.Provider value={{ previousChats, setPreviousChats }}>
+    <ChatContext.Provider
+      value={{ chatId, setChatId, previousChats, setPreviousChats }}
+    >
       {children}
     </ChatContext.Provider>
   );

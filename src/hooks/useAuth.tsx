@@ -1,8 +1,10 @@
 import { useMutation } from "react-query";
 import { useAuthContext } from "../context";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const useApiAuth = () => {
+  const navigate = useNavigate();
   const { authState, setAuthState } = useAuthContext();
 
   const { mutate: checkIsAuth } = useMutation(
@@ -19,6 +21,7 @@ export const useApiAuth = () => {
           isError: false,
           state: data.message,
         });
+        navigate("/chat-bot");
       },
       onError: (error: any) => {
         setAuthState({
@@ -26,6 +29,7 @@ export const useApiAuth = () => {
           isError: true,
           state: error?.response.data.detail,
         });
+        navigate("/");
       },
     }
   );
