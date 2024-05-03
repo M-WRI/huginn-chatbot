@@ -52,6 +52,7 @@ export const Layout = () => {
       {shouldShowOutlet && (
         <div className={`chatbot-container ${path}`}>
           <Header
+            handleCancelChat={() => handleFinishChat()}
             handleOpenChat={
               path === "full-screen"
                 ? () => handleMinimizeFullScreen()
