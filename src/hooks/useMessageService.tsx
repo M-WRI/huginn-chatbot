@@ -31,9 +31,6 @@ export const useMessageService = () => {
           { role: data.role, content: data.content },
         ]);
       },
-      onError: (data) => {
-        console.log(data, "<------- data");
-      },
     }
   );
 
