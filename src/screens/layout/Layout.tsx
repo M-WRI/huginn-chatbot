@@ -67,7 +67,9 @@ export const Layout = () => {
           />
           <div className="test">
             <Outlet context={{ previousChats, isLoading }} />
-            {path.length && <Input config={{ value, setValue, getMessages }} />}
+            {path.length && (
+              <Input config={{ value, setValue, getMessages, isLoading }} />
+            )}
           </div>
         </div>
       )}

@@ -3,10 +3,9 @@ import { ChatContainer } from "../components/ChatContainer";
 import { IMessage } from "../entities";
 
 export const Chatbot = () => {
-  const { previousChats, isLoading } = useOutletContext<{
+  const { previousChats } = useOutletContext<{
     previousChats: IMessage[];
-    isLoading: boolean;
   }>();
 
-  return <ChatContainer previousChats={previousChats} isLoading={isLoading} />;
+  return <ChatContainer previousChats={previousChats} />;
 };

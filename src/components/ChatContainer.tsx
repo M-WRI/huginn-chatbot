@@ -1,13 +1,10 @@
 import { useEffect, useRef } from "react";
 import { IMessage } from "../entities";
-import { ReactComponent as LoadingIcon } from "../assets/loading_spinner_icon.svg";
 
 export const ChatContainer = ({
   previousChats,
-  isLoading,
 }: {
   previousChats: IMessage[];
-  isLoading: boolean;
 }) => {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
@@ -28,11 +25,6 @@ export const ChatContainer = ({
         </div>
       ))}
       <div ref={endOfMessagesRef} />
-      {isLoading && (
-        <div className="loading-spinner">
-          <LoadingIcon className="loading-icon" />
-        </div>
-      )}
     </main>
   );
 };

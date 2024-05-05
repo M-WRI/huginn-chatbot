@@ -27,26 +27,43 @@ export const Header = ({
       </div>
       <div className={`chatbot-header-button ${customClass}`}>
         {path.length && customClass !== "full-screen" ? (
-          <CancelIcon className="icon" onClick={handleCancelChat} />
+          <div title="Chat Beenden">
+            <CancelIcon className="icon" onClick={handleCancelChat} />
+          </div>
         ) : null}
         {path.length ? (
           <>
             {customClass === "full-screen" ? (
-              <Button onClick={handleOpenFullWindowChat} type="outline">
+              <Button
+                onClick={handleOpenFullWindowChat}
+                type="outline"
+                title="Chat Beenden"
+              >
                 Chat beenden
               </Button>
             ) : (
-              <ExpandIcon className="icon" onClick={handleOpenFullWindowChat} />
+              <div title="Vollbild">
+                <ExpandIcon
+                  className="icon"
+                  onClick={handleOpenFullWindowChat}
+                />
+              </div>
             )}
           </>
         ) : null}
 
         {customClass === "full-screen" ? (
-          <Button onClick={handleOpenChat} type="primary">
+          <Button
+            onClick={handleOpenChat}
+            type="primary"
+            title="Chat Minimieren"
+          >
             Chat Fenster minimieren
           </Button>
         ) : (
-          <ArrowDownIcon className="icon" onClick={handleOpenChat} />
+          <div title="Chat Minimieren">
+            <ArrowDownIcon className="icon" onClick={handleOpenChat} />
+          </div>
         )}
       </div>
     </header>
