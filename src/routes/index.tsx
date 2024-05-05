@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Chatbot } from "../screens/Chatbot";
-import { Layout } from "../screens/layout";
+import { Chatbot, Layout, Start } from "../screens";
 
 export const router = createBrowserRouter([
   {
@@ -9,6 +8,10 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Start />,
+      },
+      {
+        path: "chat-bot",
         element: <Chatbot />,
       },
       {

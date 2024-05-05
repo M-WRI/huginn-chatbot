@@ -1,15 +1,18 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as HuginnIcon } from "../../assets/huginn_logo_icon.svg";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { useApiAuth, useMessageService } from "../../hooks";
 import { Input } from "../../components/Input";
+import { useChatContext } from "../../context";
 
 export const Layout = () => {
+  const { chatId } = useChatContext();
   const { pathname } = useLocation();
   const { checkIsAuth, authState } = useApiAuth();
   const { previousChats, isLoading, value, setValue, getMessages } =
     useMessageService();
+  const navigate = useNavigate();
 
   const [chatIsOpen, setChatIsOpen] = useState<boolean>(false);
 
@@ -21,27 +24,53 @@ export const Layout = () => {
   }
 
   const handleOpenFullWindowChat = () => {
-    const chatUrl = window.location.origin + "/full-screen";
-    window.open(chatUrl, "_blank");
+    navigate("/full-screen");
+  };
+
+  const handleFinishChat = () => {
+    setChatIsOpen(false);
+    localStorage.removeItem("chatId");
+    localStorage.removeItem("previousChats");
+    navigate("/");
+  };
+
+  const handleToggleScreenState = () => {
+    setChatIsOpen((prevChatIsOpen: boolean) => !prevChatIsOpen);
+  };
+
+  const handleMinimizeFullScreen = () => {
+    navigate("/chat-bot");
   };
 
   useEffect(() => {
-    chatIsOpen && !authState.authHasBeenTriggered && checkIsAuth("");
-  }, [chatIsOpen]);
+    chatIsOpen && !authState.authHasBeenTriggered && checkIsAuth(chatId);
+    authState.isError && navigate("/");
+  }, [chatIsOpen, authState]);
 
   return (
     <div className={`app-container ${path}`}>
       {shouldShowOutlet && (
         <div className={`chatbot-container ${path}`}>
-          {authState.isError && <ErrorModal {...authState.state} />}
           <Header
-            handleOpenChat={() =>
-              setChatIsOpen((prevChatIsOpen: boolean) => !prevChatIsOpen)
+            handleCancelChat={() => handleFinishChat()}
+            handleOpenChat={
+              path === "full-screen"
+                ? () => handleMinimizeFullScreen()
+                : () => handleToggleScreenState()
             }
-            handleOpenFullWindowChat={handleOpenFullWindowChat}
+            handleOpenFullWindowChat={
+              path === "full-screen"
+                ? () => handleFinishChat()
+                : () => handleOpenFullWindowChat()
+            }
+            customClass={path}
           />
-          <Outlet context={{ previousChats, isLoading }} />
-          <Input config={{ value, setValue, getMessages }} />
+          <div className="test">
+            <Outlet context={{ previousChats, isLoading }} />
+            {path.length && (
+              <Input config={{ value, setValue, getMessages, isLoading }} />
+            )}
+          </div>
         </div>
       )}
 
@@ -55,32 +84,3 @@ export const Layout = () => {
 };
 
 export default Layout;
-
-const ErrorModal = ({ ...props }) => {
-  const { title, message } = ERROR_CODES[props.error_code];
-
-  return (
-    <div className="test-modal">
-      <div>
-        <h2>{title}</h2>
-        <p>{message}</p>
-      </div>
-    </div>
-  );
-};
-
-const ERROR_CODES: any = {
-  token_empty: {
-    title: "Kein Token",
-    message: "Sie haben keinen token gesendet",
-  },
-  token_not_found: {
-    title: "Ungültiger Token",
-    message: "Der von ihnen gesendete Token existiert nicht",
-  },
-  token_expired: {
-    title: "Zeit limit überschritten",
-    message:
-      "Das Zeitlimit würde überschritten, Sie können einen neuen Chat anfanen",
-  },
-};

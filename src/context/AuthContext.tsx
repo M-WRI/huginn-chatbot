@@ -1,17 +1,28 @@
 import { useContext, createContext, ReactNode, useState } from "react";
 
-const AuthContext = createContext<any | undefined>(undefined);
+interface IAuthContext {
+  authState: IAuthState;
+  setAuthState: (value: IAuthState) => void;
+}
+
+interface IAuthState {
+  authHasBeenTriggered: boolean;
+  isError: boolean;
+  state: string;
+}
+
+const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 const initialValue = {
   authHasBeenTriggered: false,
   isError: false,
-  state: {},
+  state: "",
 };
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [authState, setAuthState] = useState<any>(initialValue);
+  const [authState, setAuthState] = useState<IAuthState>(initialValue);
 
   return (
     <AuthContext.Provider value={{ authState, setAuthState }}>
