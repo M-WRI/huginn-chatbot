@@ -10,18 +10,18 @@ body {
   font-family: "New Atten Round", sans-serif;
 }
 
-.app-container input {
-  font-family: "New Atten Round", sans-serif !important;
-  padding: 12px 8px !important;
-  border-radius: 8px !important;
-  color: #fff !important;
-  width: 100% !important;
+input {
+  font-family: "New Atten Round", sans-serif;
+  padding: 12px 8px;
+  border-radius: 8px;
+  color: #fff;
+  width: 100%;
 }
 
 .app-container {
-  position: absolute !important;
-  bottom: 32px !important;
-  right: 32px !important;
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
 }
 
 .app-container.full-screen {
@@ -112,10 +112,9 @@ body {
 }
 
 .chatbot-header-logo-text {
-  color: #fff !important;
-  font-size: 18px !important;
-  font-weight: bold !important;
-  font-family: "New Atten Round", sans-serif !important;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .chatbot-header-logo-text.full-screen {
@@ -165,15 +164,12 @@ body {
 }
 
 .chat-container {
-  padding: 8px !important;
-  color: #fff !important;
-  border-radius: 8px !important;
-  max-width: 230px !important;
-}
-
-.chat-container p {
-  font-size: 14px !important;
-  color: #fff !important;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding: 8px;
+  color: #fff;
+  border-radius: 8px;
+  max-width: 230px;
 }
 
 .app-container.full-screen .chat-container {
@@ -262,44 +258,42 @@ body {
 }
 
 .start-headline {
-  font-size: 24px !important;
-  color: #fff !important;
-  font-family: "New Atten Round", sans-serif !important;
+  font-size: 24px;
+  color: #fff;
 }
 
 .button {
-  font-family: "New Atten Round", sans-serif !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  padding: 16px !important;
-  border-radius: 32px !important;
-  border: none !important;
-  cursor: pointer !important;
-  transition: all 0.2s !important;
-  width: 100% !important;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 16px;
+  border-radius: 32px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
 }
 
 .button.primary {
-  color: #fff !important;
-  background: #5ec8bd !important;
+  color: #fff;
+  background: #5ec8bd;
 }
 
 .button.outline {
-  color: #5ec8bd !important;
-  background: transparent !important;
-  border: 1px solid #5ec8bd !important;
+  color: #5ec8bd;
+  background: transparent;
+  border: 1px solid #5ec8bd;
 }
 
 .button.primary:hover {
-  background: #4c9d95 !important;
-  scale: 0.98 !important;
-  transition: all 0.2s !important;
+  background: #4c9d95;
+  scale: 0.98;
+  transition: all 0.2s;
 }
 
 .button.outline:hover {
-  color: #4c9d95 !important;
-  background: transparent !important;
-  border: 1px solid #4c9d95 !important;
-  scale: 0.98 !important;
-  transition: all 0.2s !important;
+  color: #4c9d95;
+  background: transparent;
+  border: 1px solid #4c9d95;
+  scale: 0.98;
+  transition: all 0.2s;
 }
