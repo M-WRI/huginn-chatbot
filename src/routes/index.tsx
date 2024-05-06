@@ -1,7 +1,7 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createMemoryRouter } from "react-router-dom";
 import { Chatbot, Layout, Start } from "../screens";
 
-export const router = createBrowserRouter([
+export const router = createMemoryRouter([
   {
     path: "/",
     element: <Layout />,

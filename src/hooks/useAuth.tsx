@@ -9,9 +9,12 @@ export const useApiAuth = () => {
 
   const { mutate: checkIsAuth } = useMutation(
     async (chatId: string | null) => {
-      const response = await axios.post(`http://localhost:8000/chat/auth/`, {
-        chat_id: chatId,
-      });
+      const response = await axios.post(
+        `http://98.67.215.117:8000/chat/auth/`,
+        {
+          chat_id: chatId,
+        }
+      );
       return response.data;
     },
     {
