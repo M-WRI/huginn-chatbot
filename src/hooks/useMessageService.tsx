@@ -13,7 +13,7 @@ export const useMessageService = () => {
     async (messageContent: { role: string; content: string }) => {
       setStreamLoading(true);
       const response: any = await fetch(
-        `http://98.67.215.117:8000/question/${chatId}`,
+        `https://20.218.146.245/question/${chatId}`,
         {
           method: "POST",
           headers: {
