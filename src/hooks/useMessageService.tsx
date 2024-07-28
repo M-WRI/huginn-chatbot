@@ -13,7 +13,7 @@ export const useMessageService = () => {
     async (messageContent: { role: string; content: string }) => {
       setStreamLoading(true);
       const response: any = await fetch(
-        `https://20.218.146.245/question/${chatId}`,
+        `https://winterspektakel-chatbot.de/question/${chatId}`,
         {
           method: "POST",
           headers: {
