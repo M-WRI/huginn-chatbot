@@ -7,7 +7,7 @@ import { queryClient } from "./queryCliet";
 import "./index.css";
 import { router } from "./routes";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById("huginn_root_container")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>

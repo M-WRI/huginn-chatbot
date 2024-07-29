@@ -1,16 +1,16 @@
 @import url("./fonts.css");
 
-* {
+#huginn_root_container * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+#huginn_root_container body {
   font-family: "New Atten Round", sans-serif;
 }
 
-input {
+#huginn_root_container input {
   font-family: "New Atten Round", sans-serif;
   padding: 12px 8px;
   border-radius: 8px;
@@ -18,13 +18,13 @@ input {
   width: 100%;
 }
 
-.app-container {
+#huginn_root_container .app-container {
   position: absolute;
   bottom: 32px;
   right: 32px;
 }
 
-.app-container.full-screen {
+#huginn_root_container .app-container.full-screen {
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -32,7 +32,7 @@ input {
   display: flex;
 }
 
-.chatbot-container {
+#huginn_root_container .chatbot-container {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -52,14 +52,14 @@ input {
   flex: 1;
 }
 
-.test {
+#huginn_root_container .test {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
 }
 
-.chatbot-container.full-screen {
+#huginn_root_container .chatbot-container.full-screen {
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 16px;
@@ -68,7 +68,8 @@ input {
   border-radius: 0;
 }
 
-.chatbot-header {
+#huginn_root_container .chatbot-header {
+  font-family: "New Atten Round", sans-serif;
   position: relative;
   z-index: 15;
   padding: 0 16px 16px 16px;
@@ -79,7 +80,7 @@ input {
   align-items: flex-end;
 }
 
-.chatbot-header.full-screen {
+#huginn_root_container .chatbot-header.full-screen {
   border-right: 1px solid #9b9c9f;
   border-bottom: unset;
   flex-direction: column;
@@ -88,74 +89,74 @@ input {
   gap: 16px;
 }
 
-.chatbot-header,
-.input-container {
+#huginn_root_container .chatbot-header,
+#huginn_root_container .input-container {
   flex-shrink: 0;
 }
 
-.chatbot-header-logo {
+#huginn_root_container .chatbot-header-logo {
   display: flex;
   align-items: flex-end;
   gap: 8px;
 }
 
-.chatbot-header-logo.full-screen {
+#huginn_root_container .chatbot-header-logo.full-screen {
   flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
   gap: 16px;
 }
 
-.chatbot-header-logo-icon.full-screen {
+#huginn_root_container .chatbot-header-logo-icon.full-screen {
   width: 70px;
   height: 70px;
 }
 
-.chatbot-header-logo-text {
+#huginn_root_container .chatbot-header-logo-text {
   color: #fff;
   font-size: 18px;
   font-weight: bold;
 }
 
-.chatbot-header-logo-text.full-screen {
+#huginn_root_container .chatbot-header-logo-text.full-screen {
   font-size: 24px;
 }
 
-.chatbot-header-button {
+#huginn_root_container .chatbot-header-button {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.chatbot-header-button.full-screen {
+#huginn_root_container .chatbot-header-button.full-screen {
   flex-direction: column;
   align-items: center;
 }
 
-.icon {
+#huginn_root_container .icon {
   cursor: pointer;
 }
 
-.input-container {
+#huginn_root_container .input-container {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.text-input {
+#huginn_root_container .text-input {
   width: 100%;
   padding-right: 40px;
   background: #36383e;
   border: none;
 }
 
-.input-send-message {
+#huginn_root_container .input-send-message {
   position: absolute;
   right: 8px;
   cursor: pointer;
 }
 
-.main-container {
+#huginn_root_container .main-container {
   flex-grow: 1;
   overflow-y: auto;
   display: flex;
@@ -163,7 +164,8 @@ input {
   align-items: start;
 }
 
-.chat-container {
+#huginn_root_container .chat-container {
+  font-family: "New Atten Round", sans-serif;
   font-size: 14px;
   margin-bottom: 8px;
   padding: 8px;
@@ -172,20 +174,20 @@ input {
   max-width: 230px;
 }
 
-.app-container.full-screen .chat-container {
+#huginn_root_container .app-container.full-screen .chat-container {
   max-width: 600px;
 }
 
-.bot-chat {
+#huginn_root_container .bot-chat {
   background: #36383e;
 }
 
-.user-chat {
+#huginn_root_container .user-chat {
   align-self: flex-end;
   background: #5ec8bd;
 }
 
-.input-container {
+#huginn_root_container .input-container {
   flex-shrink: 0;
   padding: 8px 0;
   width: 100%;
@@ -193,7 +195,7 @@ input {
   box-shadow: 0px -2px 10px 0px rgba(24, 26, 31, 0.6);
 }
 
-.chatbot-button {
+#huginn_root_container .chatbot-button {
   position: absolute;
   bottom: 0px;
   right: 0px;
@@ -216,12 +218,12 @@ input {
   cursor: pointer;
 }
 
-.chatbot-button:hover {
+#huginn_root_container .chatbot-button:hover {
   scale: 1.05;
   transition: scale ease-in-out 0.3s;
 }
 
-.chatbot-button-icon {
+#huginn_root_container .chatbot-button-icon {
   width: 42px;
   height: 42px;
   transform: translateY(-4px);
@@ -236,18 +238,18 @@ input {
   }
 }
 
-.loading-spinner {
+#huginn_root_container .loading-spinner {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
-.loading-icon {
+#huginn_root_container .loading-icon {
   animation: spin 1s linear infinite;
 }
 
-.start-container {
+#huginn_root_container .start-container {
   height: 100%;
   width: 100%;
   display: flex;
@@ -257,12 +259,12 @@ input {
   gap: 16px;
 }
 
-.start-headline {
+#huginn_root_container .start-headline {
   font-size: 24px;
   color: #fff;
 }
 
-.button {
+#huginn_root_container .button {
   font-size: 14px;
   font-weight: 700;
   padding: 16px;
@@ -273,24 +275,24 @@ input {
   width: 100%;
 }
 
-.button.primary {
+#huginn_root_container .button.primary {
   color: #fff;
   background: #5ec8bd;
 }
 
-.button.outline {
+#huginn_root_container .button.outline {
   color: #5ec8bd;
   background: transparent;
   border: 1px solid #5ec8bd;
 }
 
-.button.primary:hover {
+#huginn_root_container .button.primary:hover {
   background: #4c9d95;
   scale: 0.98;
   transition: all 0.2s;
 }
 
-.button.outline:hover {
+#huginn_root_container .button.outline:hover {
   color: #4c9d95;
   background: transparent;
   border: 1px solid #4c9d95;
