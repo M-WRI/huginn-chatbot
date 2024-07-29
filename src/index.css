@@ -137,6 +137,13 @@
   cursor: pointer;
 }
 
+#huginn_root_container .icon:hover {
+  cursor: unset;
+  color: unset; /* Remove color change */
+  background: unset; /* Remove background change */
+  /* Add any other properties you need to unset */
+}
+
 #huginn_root_container .input-container {
   position: relative;
   display: flex;
@@ -259,6 +266,11 @@
   gap: 16px;
 }
 
+#huginn_root_container .start-logo {
+  width: 66px;
+  height: 66px;
+}
+
 #huginn_root_container .start-headline {
   font-family: "New Atten Round", sans-serif;
   font-size: 24px;
@@ -274,6 +286,14 @@
   cursor: pointer;
   transition: all 0.2s;
   width: 100%;
+}
+
+#huginn_root_container .chat-content {
+  font-family: "New Atten Round", sans-serif;
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.5;
+  text-align: left;
 }
 
 #huginn_root_container .button.primary {

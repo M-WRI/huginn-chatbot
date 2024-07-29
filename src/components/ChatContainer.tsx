@@ -21,7 +21,7 @@ export const ChatContainer = ({
             chat.role === "user" ? "user-chat" : "bot-chat"
           }`}
         >
-          <p>{chat.content}</p>
+          <p className="chat-content">{chat.content}</p>
         </div>
       ))}
       <div ref={endOfMessagesRef} />

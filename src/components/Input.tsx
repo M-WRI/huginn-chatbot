@@ -30,10 +30,10 @@ export const Input = ({
         disabled={isLoading}
       />
       {isLoading ? (
-        <LoadingIcon className="input-send-message loading-icon" />
+        <LoadingIcon className="input-send-message loading-icon icon" />
       ) : (
         <SendMessage
-          className="input-send-message"
+          className="input-send-message icon"
           onClick={() => getMessages()}
         />
       )}

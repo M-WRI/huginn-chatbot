@@ -22,7 +22,7 @@ export const Header = ({
   return (
     <header className={`chatbot-header ${customClass}`}>
       <div className={`chatbot-header-logo ${customClass}`}>
-        <HuginnIcon className={`chatbot-header-logo-icon ${customClass}`} />
+        <HuginnIcon className={`chatbot-header-logo-icon ${customClass} icon`} />
         <p className={`chatbot-header-logo-text ${customClass}`}>Huginn</p>
       </div>
       <div className={`chatbot-header-button ${customClass}`}>

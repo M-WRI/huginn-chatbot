@@ -76,7 +76,7 @@ export const Layout = () => {
 
       {!chatIsOpen && path !== "full-screen" && (
         <div className="chatbot-button" onClick={handleOpenChat}>
-          <HuginnIcon className="chatbot-button-icon" />
+          <HuginnIcon className="chatbot-button-icon icon" />
         </div>
       )}
     </div>

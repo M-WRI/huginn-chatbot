@@ -24,7 +24,7 @@ export const Start = () => {
   return (
     <main className="start-container">
       <h2 className="start-headline">Huginn</h2>
-      <HuginnIcon />
+      <HuginnIcon className="start-logo icon" />
       <Button type="outline" onClick={startNewChat} title="Chat Start">
         Neuen chat beginnen
       </Button>
