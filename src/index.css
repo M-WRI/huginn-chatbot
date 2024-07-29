@@ -19,17 +19,21 @@
 }
 
 #huginn_root_container .app-container {
-  position: absolute;
+  position: fixed;
   bottom: 32px;
   right: 32px;
+  z-index: 1000;
 }
 
 #huginn_root_container .app-container.full-screen {
+  position: fixed;
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
   display: flex;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 #huginn_root_container .chatbot-container {
