@@ -24,11 +24,21 @@ export const Layout = () => {
   const shouldShowOutlet = chatIsOpen || path === "full-screen";
 
   const handleMouseEnter = () => {
-    document.body.classList.add("no-scroll");
+    (document.body as HTMLBodyElement).style.overflow = 'hidden';
+    (document.documentElement as HTMLElement).style.overflow = 'hidden';
+    const offCanvasWrapper = document.querySelector('.off-canvas-wrapper') as HTMLElement;
+    if (offCanvasWrapper) {
+      offCanvasWrapper.style.overflow = 'hidden';
+    }
   };
 
   const handleMouseLeave = () => {
-    document.body.classList.remove("no-scroll");
+    (document.body as HTMLBodyElement).style.overflow = '';
+    (document.documentElement as HTMLElement).style.overflow = '';
+    const offCanvasWrapper = document.querySelector('.off-canvas-wrapper') as HTMLElement;
+    if (offCanvasWrapper) {
+      offCanvasWrapper.style.overflow = '';
+    }
   };
 
   function handleOpenChat() {

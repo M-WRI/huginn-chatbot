@@ -1,12 +1,5 @@
 @import url("./fonts.css");
 
-body,
-html,
-.off-canvas-wrapper,
-body.no-scroll {
-  overflow: hidden !important;
-}
-
 #huginn_root_container * {
   margin: 0;
   padding: 0;
