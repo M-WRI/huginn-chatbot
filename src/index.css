@@ -333,6 +333,7 @@
   position: fixed;
   bottom: 32px;
   right: 32px;
+  z-index: 9999999999999999;
 }
 
 @media screen and (max-width: 645px) {

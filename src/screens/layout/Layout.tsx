@@ -62,8 +62,6 @@ export const Layout = () => {
 
   return (
     <>
-      <div style={{ height: "100vh", background: "lightblue" }}></div>
-      <div style={{ height: "100vh", background: "lime" }}></div>
       <div
         className={`app-container ${path}`}
         onMouseEnter={() => handleMouseEnter()}
