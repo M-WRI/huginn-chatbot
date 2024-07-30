@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as HuginnIcon } from "../../assets/huginn_logo_icon.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header } from "../../components/Header";
 import { useApiAuth, useMessageService } from "../../hooks";
 import { Input } from "../../components/Input";
@@ -22,6 +22,14 @@ export const Layout = () => {
 
   const path = pathname.split("/")[1];
   const shouldShowOutlet = chatIsOpen || path === "full-screen";
+
+  const handleMouseEnter = () => {
+    document.body.classList.add("no-scroll");
+  };
+
+  const handleMouseLeave = () => {
+    document.body.classList.remove("no-scroll");
+  };
 
   function handleOpenChat() {
     setChatIsOpen(true);
@@ -49,11 +57,18 @@ export const Layout = () => {
   useEffect(() => {
     chatIsOpen && !authState.authHasBeenTriggered && checkIsAuth(chatId);
     authState.isError && navigate("/");
+    !chatIsOpen && handleMouseLeave();
   }, [chatIsOpen, authState]);
 
   return (
     <>
-      <div className={`app-container ${path}`}>
+      <div style={{ height: "100vh", background: "lightblue" }}></div>
+      <div style={{ height: "100vh", background: "lime" }}></div>
+      <div
+        className={`app-container ${path}`}
+        onMouseEnter={() => handleMouseEnter()}
+        onMouseLeave={() => handleMouseLeave()}
+      >
         {shouldShowOutlet && (
           <div className={`chatbot-container ${path}`}>
             <Header
