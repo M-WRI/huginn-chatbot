@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ReactComponent as HuginnIcon } from "../../assets/huginn_logo_icon.svg";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { useApiAuth, useMessageService } from "../../hooks";
 import { Input } from "../../components/Input";
@@ -45,9 +45,9 @@ export const Layout = () => {
     }
   };
 
-  function handleOpenChat() {
+  const handleOpenChat = () => {
     setChatIsOpen(true);
-  }
+  };
 
   const handleOpenFullWindowChat = () => {
     navigate("/full-screen");
@@ -69,33 +69,45 @@ export const Layout = () => {
   };
 
   useEffect(() => {
-    chatIsOpen && !authState.authHasBeenTriggered && checkIsAuth(chatId);
-    authState.isError && navigate("/");
-    !chatIsOpen && handleMouseLeave();
-  }, [chatIsOpen, authState]);
+    if (chatIsOpen && !authState.authHasBeenTriggered) {
+      checkIsAuth(chatId);
+    }
+    if (authState.isError) {
+      navigate("/");
+    }
+    if (!chatIsOpen) {
+      handleMouseLeave();
+    }
+  }, [chatIsOpen]);
+
+  useEffect(() => {
+    if (chatIsOpen) {
+      checkIsAuth(chatId);
+    }
+  }, [chatIsOpen]);
 
   return (
     <>
       <div
         className={`app-container ${path}`}
-        onMouseEnter={() => handleMouseEnter()}
-        onMouseLeave={() => handleMouseLeave()}
-        onTouchStart={() => handleMouseEnter()}
-        onTouchEnd={() => handleMouseLeave()}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleMouseEnter}
+        onTouchEnd={handleMouseLeave}
       >
         {shouldShowOutlet && (
           <div className={`chatbot-container ${path}`}>
             <Header
-              handleCancelChat={() => handleFinishChat()}
+              handleCancelChat={handleFinishChat}
               handleOpenChat={
                 path === "full-screen" && !isMobile
-                  ? () => handleMinimizeFullScreen()
-                  : () => handleToggleScreenState()
+                  ? handleMinimizeFullScreen
+                  : handleToggleScreenState
               }
               handleOpenFullWindowChat={
                 path === "full-screen"
-                  ? () => handleFinishChat()
-                  : () => handleOpenFullWindowChat()
+                  ? handleFinishChat
+                  : handleOpenFullWindowChat
               }
               customClass={path}
             />

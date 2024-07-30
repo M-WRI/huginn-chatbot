@@ -12,7 +12,6 @@ export const Start = () => {
     localStorage.removeItem("chatId");
     localStorage.removeItem("previousChats");
 
-    // const newChatId = uuidv4();
     const newChatId = Math.floor(100000000 + Math.random() * 90000);
 
     setChatId(newChatId.toString());

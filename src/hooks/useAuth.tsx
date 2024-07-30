@@ -19,6 +19,7 @@ export const useApiAuth = () => {
     },
     {
       onSuccess: (data) => {
+        console.log(data, "<------ data");
         setAuthState({
           authHasBeenTriggered: true,
           isError: false,
