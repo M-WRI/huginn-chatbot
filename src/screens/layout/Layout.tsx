@@ -24,20 +24,24 @@ export const Layout = () => {
   const shouldShowOutlet = chatIsOpen || path === "full-screen";
 
   const handleMouseEnter = () => {
-    (document.body as HTMLBodyElement).style.overflow = 'hidden';
-    (document.documentElement as HTMLElement).style.overflow = 'hidden';
-    const offCanvasWrapper = document.querySelector('.off-canvas-wrapper') as HTMLElement;
+    (document.body as HTMLBodyElement).style.overflow = "hidden";
+    (document.documentElement as HTMLElement).style.overflow = "hidden";
+    const offCanvasWrapper = document.querySelector(
+      ".off-canvas-wrapper"
+    ) as HTMLElement;
     if (offCanvasWrapper) {
-      offCanvasWrapper.style.overflow = 'hidden';
+      offCanvasWrapper.style.overflow = "hidden";
     }
   };
 
   const handleMouseLeave = () => {
-    (document.body as HTMLBodyElement).style.overflow = '';
-    (document.documentElement as HTMLElement).style.overflow = '';
-    const offCanvasWrapper = document.querySelector('.off-canvas-wrapper') as HTMLElement;
+    (document.body as HTMLBodyElement).style.overflow = "";
+    (document.documentElement as HTMLElement).style.overflow = "";
+    const offCanvasWrapper = document.querySelector(
+      ".off-canvas-wrapper"
+    ) as HTMLElement;
     if (offCanvasWrapper) {
-      offCanvasWrapper.style.overflow = '';
+      offCanvasWrapper.style.overflow = "";
     }
   };
 
@@ -76,6 +80,8 @@ export const Layout = () => {
         className={`app-container ${path}`}
         onMouseEnter={() => handleMouseEnter()}
         onMouseLeave={() => handleMouseLeave()}
+        onTouchStart={() => handleMouseEnter()}
+        onTouchEnd={() => handleMouseLeave()}
       >
         {shouldShowOutlet && (
           <div className={`chatbot-container ${path}`}>
