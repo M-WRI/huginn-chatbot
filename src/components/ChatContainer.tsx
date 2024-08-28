@@ -35,7 +35,7 @@ export const ChatContainer = ({
             }}
             className="chat-content"
           >
-            chat.content
+            {chat.content}
           </ReactMarkdown>
         </div>
       ))}
