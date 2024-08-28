@@ -6,15 +6,13 @@ import axios from "axios";
 export const useApiAuth = () => {
   const navigate = useNavigate();
   const { authState, setAuthState } = useAuthContext();
+  const baseURL = process.env.REACT_APP_API_URL;
 
   const { mutate: checkIsAuth } = useMutation(
     async (chatId: string | null) => {
-      const response = await axios.post(
-        `https://winterspektakel-chatbot.de/chat/auth/`,
-        {
-          chat_id: chatId,
-        }
-      );
+      const response = await axios.post(`${baseURL}/chat/auth/`, {
+        chat_id: chatId,
+      });
       return response.data;
     },
     {

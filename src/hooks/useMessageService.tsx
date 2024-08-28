@@ -4,6 +4,7 @@ import { IMessage } from "../entities";
 import { useMutation } from "react-query";
 
 export const useMessageService = () => {
+  const baseURL = process.env.REACT_APP_API_URL;
   const { chatId, previousChats, setPreviousChats } = useChatContext();
 
   const [value, setValue] = useState<string>("");
@@ -12,18 +13,15 @@ export const useMessageService = () => {
   const { mutate } = useMutation(
     async (messageContent: { role: string; content: string }) => {
       setStreamLoading(true);
-      const response: any = await fetch(
-        `https://winterspektakel-chatbot.de/question/${chatId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            messages: [messageContent],
-          }),
-        }
-      );
+      const response: any = await fetch(`${baseURL}/question/${chatId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [messageContent],
+        }),
+      });
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();

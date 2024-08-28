@@ -1,5 +1,13 @@
 import { useEffect, useRef } from "react";
 import { IMessage } from "../entities";
+import ReactMarkdown from "react-markdown";
+import { Link } from "react-router-dom";
+
+const CustomLink = ({ href, children }: any) => (
+  <Link to={href} target="_blank" rel="noopener noreferrer">
+    {children}
+  </Link>
+);
 
 export const ChatContainer = ({
   previousChats,
@@ -21,7 +29,14 @@ export const ChatContainer = ({
             chat.role === "user" ? "user-chat" : "bot-chat"
           }`}
         >
-          <p className="chat-content">{chat.content}</p>
+          <ReactMarkdown
+            components={{
+              a: CustomLink,
+            }}
+            className="chat-content"
+          >
+            chat.content
+          </ReactMarkdown>
         </div>
       ))}
       <div ref={endOfMessagesRef} />
