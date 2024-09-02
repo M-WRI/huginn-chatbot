@@ -427,8 +427,6 @@
   }
 
   #huginn_root_container .chatbot-header-logo-text.full-screen {
-    font-size: unset;
-
     color: #fff;
     font-size: 18px;
     font-weight: bold;
