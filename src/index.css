@@ -4,11 +4,11 @@
 
 @import url("./fonts.css");
 
-#huginn_root_container * {
+/* #huginn_root_container * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
 #huginn_root_container body {
   font-family: "New Atten Round", sans-serif;
@@ -50,11 +50,7 @@
   height: 550px;
   border-radius: 16px;
   background: rgb(15, 34, 62);
-  background: radial-gradient(
-    circle,
-    rgba(15, 34, 62, 1) 0%,
-    rgba(10, 24, 46, 1) 100%
-  );
+  background: radial-gradient(circle, rgba(15, 34, 62, 1) 0%, #0a182e 100%);
   padding: 16px;
   overflow: auto;
   flex: 1;
