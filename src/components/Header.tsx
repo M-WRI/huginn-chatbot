@@ -39,7 +39,7 @@ export const Header = ({
           className={`chatbot-header-logo-icon ${customClass} icon`}
         />
         <p className={`chatbot-header-logo-text ${customClass}`}>
-          {config?.title}
+          {config?.title || "Huginn"}
         </p>
       </div>
       <div className={`chatbot-header-button ${customClass}`}>

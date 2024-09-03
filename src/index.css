@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("./fonts.css");
 
 #huginn_root_container * {
@@ -137,9 +141,9 @@
   align-items: center;
 }
 
-#huginn_root_container .icon {
+/* #huginn_root_container .icon {
   cursor: pointer;
-}
+} */
 
 #huginn_root_container .icon:hover {
   cursor: unset;
@@ -238,11 +242,6 @@
   cursor: pointer;
 }
 
-#huginn_root_container .chatbot-button:hover {
-  scale: 1.05;
-  transition: scale ease-in-out 0.3s;
-}
-
 #huginn_root_container .chatbot-button-icon {
   width: 42px;
   height: 42px;
@@ -269,7 +268,7 @@
   animation: spin 1s linear infinite;
 }
 
-#huginn_root_container .start-container {
+/* #huginn_root_container .start-container {
   height: 100%;
   width: 100%;
   display: flex;
@@ -277,20 +276,20 @@
   align-items: center;
   flex-direction: column;
   gap: 16px;
-}
+} */
 
-#huginn_root_container .start-logo {
+/* #huginn_root_container .start-logo {
   width: 66px;
   height: 66px;
-}
+} */
 
-#huginn_root_container .start-headline {
+/* #huginn_root_container .start-headline {
   font-family: "New Atten Round", sans-serif;
   font-size: 24px;
   color: #fbea6a;
-}
+} */
 
-#huginn_root_container .button {
+/* #huginn_root_container .button {
   font-size: 14px;
   font-weight: 700;
   padding: 16px;
@@ -299,16 +298,9 @@
   cursor: pointer;
   transition: all 0.2s;
   width: 100%;
-}
+} */
 
-#huginn_root_container .chat-content {
-  font-family: "New Atten Round", sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  text-align: left;
-}
-
-#huginn_root_container .button.primary {
+/* #huginn_root_container .button.primary {
   color: #0a182e;
   background: #fbea6a;
 }
@@ -317,6 +309,18 @@
   color: #fbea6a;
   background: transparent;
   border: 1px solid #fbea6a;
+} */
+
+/* #huginn_root_container .chatbot-button:hover {
+  scale: 1.05;
+  transition: scale ease-in-out 0.3s;
+} */
+
+#huginn_root_container .chat-content {
+  font-family: "New Atten Round", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
 }
 
 #huginn_root_container .button.primary:hover {

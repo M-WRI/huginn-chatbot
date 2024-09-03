@@ -9,8 +9,20 @@ export const Button = ({
   title?: string;
   onClick?: () => void;
 }) => {
+  // CONFIG - BUTTON STYLES
+  const baseClasses =
+    "text-sm font-bold p-4 cursor-pointer transition-all w-full rounded-xl hover:scale-95";
+  const typeClasses = {
+    outline: "text-[#fbea6a] bg-transparent border border-[#fbea6a]",
+    primary: "text-[#fbea6a] bg-[#fbea6a]",
+  };
+
   return (
-    <button onClick={onClick} className={`button ${type}`} title={title}>
+    <button
+      onClick={onClick}
+      className={`${baseClasses} ${typeClasses[type]}`}
+      title={title}
+    >
       {children}
     </button>
   );

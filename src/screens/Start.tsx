@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useChatContext } from "../context";
 // import { v4 as uuidv4 } from "uuid"; <----- to be used in the moment the backend can do that
-import { ReactComponent as HuginnIcon } from "../assets/huginn_logo_xl.svg";
 import { Button } from "../components/Button";
+import { HuginnIcon } from "../components/Icons";
 
 export const Start = () => {
   const { setChatId, setPreviousChats } = useChatContext();
@@ -21,9 +21,22 @@ export const Start = () => {
   };
 
   return (
-    <main className="start-container">
-      <h2 className="start-headline">Huginn</h2>
-      <HuginnIcon className="start-logo icon" />
+    // start-container
+    <main className="h-full w-full flex justify-center items-center flex-col gap-4">
+      {/* start-headline */}
+      <h2
+        className="start-headline font-sans font-bold text-2xl"
+        style={{
+          // CONFIG - START COLOR
+          color: "#fbea6a",
+        }}
+      >
+        {/* CONFIG - TITLE */}
+        Huginn
+      </h2>
+      {/* CONFIG - ICON COLOR */}
+      {/* start-logo */}
+      <HuginnIcon fill="#FBEA6A" stroke="#FBEA6A" className="w-16 h-16" />
       <Button type="outline" onClick={startNewChat} title="Chat Start">
         Neuen chat beginnen
       </Button>
