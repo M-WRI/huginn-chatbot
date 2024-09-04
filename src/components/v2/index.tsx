@@ -1,155 +1,36 @@
 import { useState } from "react";
-import {
-  ArrowDownIcon,
-  CancelIcon,
-  ExpandIcon,
-  HuginnIcon,
-  LoadingIcon,
-  SendMessageIcon,
-} from "../Icons";
-import ReactMarkdown from "react-markdown";
-import { IMessage } from "../../entities";
-import { Link } from "react-router-dom";
-import { chatMock } from "../../mocks";
+import { HuginnIcon } from "../Icons";
 import { configDefaultStyles } from "../../config";
+import { ChatBot } from "./components";
 
 export const NewChatBot = () => {
-  const chatContainerClasses =
-    "relative overflow-auto flex flex-1 flex-col justify-between w-[350px] h-[550px] rounded-lg";
+  const [chatIsOpen, setChatIsOpen] = useState<boolean>(false);
 
-  return (
-    <div
-      className={chatContainerClasses}
-      style={{ backgroundColor: configDefaultStyles.appContainer.bg }}
-    >
-      <Header />
-      <Messages />
-      <Input />
-    </div>
-  );
-};
+  const shouldShowOutlet = chatIsOpen;
 
-export const Header = () => {
-  const headerStyles = {
-    container: "flex gap-4 items-center justify-between px-4 py-4 border-b",
-    title: "font-sans text-2xl font-bold pointer-events-none",
-    logo: "flex gap-4 items-center",
-    navigation: "flex gap-4 items-center",
-    icon: "w-[40px] h-[40px]",
+  const handleOpenChat = () => {
+    setChatIsOpen(true);
   };
 
   return (
-    <div
-      className={headerStyles.container}
-      style={{
-        borderBottom: `1px solid ${configDefaultStyles.header.border}`,
-      }}
-    >
-      <div className={headerStyles.logo}>
-        <HuginnIcon
-          fill={configDefaultStyles.header.iconColor}
-          stroke={configDefaultStyles.header.iconColor}
-          className={headerStyles.icon}
-        />
-        <p
-          className={headerStyles.title}
-          style={{
-            color: configDefaultStyles.header.titleColor,
-          }}
-        >
-          {configDefaultStyles.header.title}
-        </p>
-      </div>
-      <div className={headerStyles.navigation}>
-        <CancelIcon fill={configDefaultStyles.header.iconColor} />
-        <ExpandIcon fill={configDefaultStyles.header.iconColor} />
-        <ArrowDownIcon fill={configDefaultStyles.header.iconColor} />
-      </div>
-    </div>
-  );
-};
-
-export const Input = () => {
-  const [state, setState] = useState();
-
-  const isLoading = false;
-
-  const inputStyles = {
-    container: "relative flex items-center flex-shrink-0 p-4 shadow-lg",
-    input:
-      "w-full pt-4 pr-[40px] pl-4 pb-4 ffont-sans text-sm text-white rounded-lg",
-    icon: "absolute right-6 cursor-pointer",
-  };
-
-  return (
-    <div className={inputStyles.container}>
-      <input
-        type="text"
-        placeholder="Schreibe eine Nachricht…"
-        className={inputStyles.input}
-        value={state}
-        onChange={(e: any) => setState(e.target.value)}
-        style={{
-          backgroundColor: configDefaultStyles.input.bg,
-          color: configDefaultStyles.input.color,
-        }}
-      />
-      {isLoading ? (
-        <LoadingIcon
-          className={inputStyles.icon}
-          fill={configDefaultStyles.input.iconColor}
-        />
-      ) : (
-        <SendMessageIcon
-          className={inputStyles.icon}
-          fill={configDefaultStyles.input.iconColor}
-          onClick={() => console.log("getMessages")}
-        />
-      )}
-    </div>
-  );
-};
-
-const CustomLink = ({ href, children }: any) => (
-  <Link to={href} target="_blank" rel="noopener noreferrer">
-    {children}
-  </Link>
-);
-
-export const Messages = () => {
-  const messageStyles = {
-    container: "flex-1 overflow-auto flex flex-col items-start px-4 mt-2",
-    message: "text-sm mb-2 p-2 rounded-lg max-w-[230px] shadow-md",
-    userMessage: "self-end",
-    assistantMessage: "self-start",
-    content: "font-sans text-sm leading-6 align-start",
-  };
-
-  return (
-    <div className={messageStyles.container}>
-      {chatMock.map((chat: IMessage, i: number) => (
-        <div
-          key={i}
-          className={`${messageStyles.message} ${
-            chat.role === "user"
-              ? messageStyles.userMessage
-              : messageStyles.assistantMessage
-          }`}
-          style={{
-            backgroundColor: configDefaultStyles.chat[chat.role].bg,
-            color: configDefaultStyles.chat[chat.role].color,
-          }}
-        >
-          <ReactMarkdown
-            components={{
-              a: CustomLink,
+    <div className={`fixed bottom-[32px] right-[32px] z-50`}>
+      {shouldShowOutlet && <ChatBot setChatIsOpen={setChatIsOpen} />}
+      <div className="fixed right-[35px] bottom-[35px] z-50">
+        {!chatIsOpen && (
+          <div
+            className="absolute bottom-0 right-0 z-10 flex justify-center items-center w-20 h-20 hover:scale-95 transition-all cursor-pointer rounded-full shadow-lg"
+            onClick={handleOpenChat}
+            style={{
+              backgroundColor: configDefaultStyles.appContainer.bg,
             }}
-            className={messageStyles.content}
           >
-            {chat.content}
-          </ReactMarkdown>
-        </div>
-      ))}
+            <HuginnIcon
+              className="w-11 h-11 cursor-pointer"
+              fill={configDefaultStyles.header.iconColor}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
