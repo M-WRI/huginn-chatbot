@@ -21,7 +21,7 @@ export const HuginnIcon = ({
         transform="translate(0.25 0.25)"
         fill={fill}
         stroke={stroke}
-        stroke-width="0.5"
+        strokeWidth="0.5"
       />
     </svg>
   );

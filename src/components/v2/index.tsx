@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { HuginnIcon } from "../Icons";
 import { configDefaultStyles } from "../../config";
 import { ChatBot } from "./components";
