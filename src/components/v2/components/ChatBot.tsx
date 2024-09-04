@@ -1,17 +1,12 @@
 import { configDefaultStyles } from "../../../config";
+import { useChatBotState } from "../../../context";
 import { Header } from "./Header";
 import { Input } from "./Input";
 import { Messages } from "./Messages";
 
-export const ChatBot = ({
-  setChatIsOpen,
-  setFullScreen,
-  fullScreen,
-}: {
-  setChatIsOpen: (state: boolean) => void;
-  setFullScreen: (state: boolean) => void;
-  fullScreen: boolean;
-}) => {
+export const ChatBot = () => {
+  const { fullScreen } = useChatBotState();
+
   const chatContainerClasses =
     "sm:relative overflow-auto flex flex-1 flex-col justify-between sm:rounded-lg shadow-lg sm:w-[350px] sm:h-[550px]";
 
@@ -26,12 +21,7 @@ export const ChatBot = ({
           style={{ backgroundColor: configDefaultStyles.appContainer.bg }}
         >
           <div className="grid grid-cols-[350px_1fr] h-full">
-            <Header
-              fullScreen={fullScreen}
-              setChatIsOpen={setChatIsOpen}
-              setFullScreen={setFullScreen}
-            />
-
+            <Header />
             <div className="flex flex-col overflow-y-auto">
               <Messages fullScreen={fullScreen} />
               <Input />
@@ -43,7 +33,7 @@ export const ChatBot = ({
           className={`${chatContainerClasses} ${mobileContainerClasses}`}
           style={{ backgroundColor: configDefaultStyles.appContainer.bg }}
         >
-          <Header setChatIsOpen={setChatIsOpen} setFullScreen={setFullScreen} />
+          <Header />
           <Messages />
           <Input />
         </div>

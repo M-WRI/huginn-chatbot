@@ -1,16 +1,11 @@
 import { configDefaultStyles } from "../../../config";
+import { useChatBotState } from "../../../context";
 import { Button } from "../../Button";
 import { ArrowDownIcon, CancelIcon, ExpandIcon, HuginnIcon } from "../../Icons";
 
-export const Header = ({
-  setChatIsOpen,
-  setFullScreen,
-  fullScreen,
-}: {
-  setChatIsOpen: (state: boolean) => void;
-  setFullScreen: (state: boolean) => void;
-  fullScreen?: boolean;
-}) => {
+export const Header = () => {
+  const { setChatIsOpen, fullScreen, setFullScreen } = useChatBotState();
+
   const headerStyles = {
     container: fullScreen
       ? "flex flex-col gap-4 items-center justify-center"

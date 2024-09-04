@@ -2,10 +2,10 @@ import { useState } from "react";
 import { HuginnIcon } from "../Icons";
 import { configDefaultStyles } from "../../config";
 import { ChatBot } from "./components";
+import { useChatBotState } from "../../context";
 
 export const NewChatBot = () => {
-  const [chatIsOpen, setChatIsOpen] = useState<boolean>(false);
-  const [fullScreen, setFullScreen] = useState<boolean>(true);
+  const { chatIsOpen, setChatIsOpen } = useChatBotState();
 
   const shouldShowOutlet = chatIsOpen;
 
@@ -15,13 +15,7 @@ export const NewChatBot = () => {
 
   return (
     <div className={`fixed bottom-[32px] right-[32px] z-50`}>
-      {shouldShowOutlet && (
-        <ChatBot
-          setChatIsOpen={setChatIsOpen}
-          setFullScreen={setFullScreen}
-          fullScreen={fullScreen}
-        />
-      )}
+      {shouldShowOutlet && <ChatBot />}
       <div className="fixed right-[35px] bottom-[35px] z-50">
         {!chatIsOpen && (
           <div
