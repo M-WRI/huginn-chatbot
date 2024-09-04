@@ -14,13 +14,13 @@
   font-family: "New Atten Round", sans-serif;
 }
 
-#huginn_root_container input {
+/* #huginn_root_container input {
   font-family: "New Atten Round", sans-serif;
   padding: 12px 8px;
   border-radius: 8px;
   color: #fff;
   width: 100%;
-}
+} */
 
 #huginn_root_container .app-container {
   position: fixed;

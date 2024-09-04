@@ -1,4 +1,17 @@
-import { ArrowDownIcon, CancelIcon, ExpandIcon, HuginnIcon } from "../Icons";
+import { useState } from "react";
+import {
+  ArrowDownIcon,
+  CancelIcon,
+  ExpandIcon,
+  HuginnIcon,
+  LoadingIcon,
+  SendMessageIcon,
+} from "../Icons";
+import ReactMarkdown from "react-markdown";
+import { IMessage } from "../../entities";
+import { Link } from "react-router-dom";
+import { chatMock } from "../../mocks";
+import { configDefaultStyles } from "../../config";
 
 export const NewChatBot = () => {
   const chatContainerClasses =
@@ -10,12 +23,8 @@ export const NewChatBot = () => {
       style={{ backgroundColor: configDefaultStyles.appContainer.bg }}
     >
       <Header />
-      <div>
-        <h1 className="text-white">hi</h1>
-      </div>
-      <div>
-        <h1 className="text-white">hi</h1>
-      </div>
+      <Messages />
+      <Input />
     </div>
   );
 };
@@ -60,14 +69,87 @@ export const Header = () => {
   );
 };
 
-const configDefaultStyles = {
-  appContainer: {
-    bg: "#0a182e",
-  },
-  header: {
-    iconColor: "#fceb6c",
-    title: "Huginn",
-    titleColor: "#fceb6c",
-    border: "#fceb6c",
-  },
+export const Input = () => {
+  const [state, setState] = useState();
+
+  const isLoading = false;
+
+  const inputStyles = {
+    container: "relative flex items-center flex-shrink-0 p-4 shadow-lg",
+    input:
+      "w-full pt-4 pr-[40px] pl-4 pb-4 ffont-sans text-sm text-white rounded-lg",
+    icon: "absolute right-6 cursor-pointer",
+  };
+
+  return (
+    <div className={inputStyles.container}>
+      <input
+        type="text"
+        placeholder="Schreibe eine Nachricht…"
+        className={inputStyles.input}
+        value={state}
+        onChange={(e: any) => setState(e.target.value)}
+        style={{
+          backgroundColor: configDefaultStyles.input.bg,
+          color: configDefaultStyles.input.color,
+        }}
+      />
+      {isLoading ? (
+        <LoadingIcon
+          className={inputStyles.icon}
+          fill={configDefaultStyles.input.iconColor}
+        />
+      ) : (
+        <SendMessageIcon
+          className={inputStyles.icon}
+          fill={configDefaultStyles.input.iconColor}
+          onClick={() => console.log("getMessages")}
+        />
+      )}
+    </div>
+  );
+};
+
+const CustomLink = ({ href, children }: any) => (
+  <Link to={href} target="_blank" rel="noopener noreferrer">
+    {children}
+  </Link>
+);
+
+export const Messages = () => {
+  const messageStyles = {
+    container: "flex-1 overflow-auto flex flex-col items-start px-4 mt-2",
+    message: "text-sm mb-2 p-2 rounded-lg max-w-[230px] shadow-md",
+    userMessage: "self-end",
+    assistantMessage: "self-start",
+    content: "font-sans text-sm leading-6 align-start",
+  };
+
+  return (
+    <div className={messageStyles.container}>
+      {chatMock.map((chat: IMessage, i: number) => (
+        <div
+          key={i}
+          className={`${messageStyles.message} ${
+            chat.role === "user"
+              ? messageStyles.userMessage
+              : messageStyles.assistantMessage
+          }`}
+          style={{
+            backgroundColor: configDefaultStyles.chat[chat.role].bg,
+            color: configDefaultStyles.chat[chat.role].color,
+          }}
+        >
+          <ReactMarkdown
+            components={{
+              a: CustomLink,
+            }}
+            className={messageStyles.content}
+          >
+            {chat.content}
+          </ReactMarkdown>
+        </div>
+      ))}
+    </div>
+  );
 };
