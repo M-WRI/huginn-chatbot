@@ -4,18 +4,19 @@ import { Button } from "../../Button";
 import { ArrowDownIcon, CancelIcon, ExpandIcon, HuginnIcon } from "../../Icons";
 
 export const Header = () => {
-  const { setChatIsOpen, fullScreen, setFullScreen } = useChatBotState();
+  const { setChatIsOpen, fullScreen, setFullScreen, isFullScreen, isMobile } =
+    useChatBotState();
 
   const headerStyles = {
-    container: fullScreen
+    container: isFullScreen
       ? "flex flex-col gap-4 items-center justify-center"
       : "flex gap-4 items-center justify-between px-4 py-4 border-b",
-    logo: fullScreen
+    logo: isFullScreen
       ? "flex flex-col-reverse items-center gap-4"
       : "flex gap-4 items-center",
     title: "font-sans text-2xl font-bold pointer-events-none",
     navigation: "flex gap-4 items-center",
-    icon: fullScreen ? "w-[66px] h-[66px]" : "w-[40px] h-[40px]",
+    icon: isFullScreen ? "w-[66px] h-[66px]" : "w-[40px] h-[40px]",
   };
 
   const handleMinimizeChatBot = () => {
@@ -23,7 +24,7 @@ export const Header = () => {
   };
 
   const handleExpandChatBot = () => {
-    setFullScreen(true);
+    setFullScreen(!fullScreen);
   };
 
   return (
@@ -51,18 +52,20 @@ export const Header = () => {
         </p>
       </div>
       <div className={headerStyles.navigation}>
-        {fullScreen ? (
+        {isFullScreen ? (
           <div className="flex flex-col gap-4">
-            <Button>Chat minimieren</Button>
+            <Button onClick={handleExpandChatBot}>Chat minimieren</Button>
             <Button type="primary">Chat beenden</Button>
           </div>
         ) : (
           <>
             <CancelIcon fill={configDefaultStyles.header.iconColor} />
-            <ExpandIcon
-              action={handleExpandChatBot}
-              fill={configDefaultStyles.header.iconColor}
-            />
+            {!isMobile && (
+              <ExpandIcon
+                action={handleExpandChatBot}
+                fill={configDefaultStyles.header.iconColor}
+              />
+            )}
             <ArrowDownIcon
               action={handleMinimizeChatBot}
               fill={configDefaultStyles.header.iconColor}

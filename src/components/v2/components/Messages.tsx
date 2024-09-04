@@ -3,6 +3,7 @@ import { chatMock } from "../../../mocks";
 import { IMessage } from "../../../entities";
 import { configDefaultStyles } from "../../../config";
 import ReactMarkdown from "react-markdown";
+import { useChatBotState } from "../../../context";
 
 const CustomLink = ({ href, children }: any) => (
   <Link to={href} target="_blank" rel="noopener noreferrer">
@@ -10,10 +11,12 @@ const CustomLink = ({ href, children }: any) => (
   </Link>
 );
 
-export const Messages = ({ fullScreen }: { fullScreen?: boolean }) => {
+export const Messages = () => {
+  const { isFullScreen } = useChatBotState();
+
   const messageStyles = {
     container: "flex-1 overflow-auto flex flex-col items-start px-4 mt-2",
-    message: fullScreen
+    message: isFullScreen
       ? "text-sm mb-2 p-2 rounded-lg max-w-[430px] shadow-md"
       : "text-sm mb-2 p-2 rounded-lg max-w-[230px] shadow-md",
     userMessage: "self-end",
