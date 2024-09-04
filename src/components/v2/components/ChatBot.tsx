@@ -9,10 +9,14 @@ export const ChatBot = ({
   setChatIsOpen: (state: boolean) => void;
 }) => {
   const chatContainerClasses =
-    "relative overflow-auto flex flex-1 flex-col justify-between w-[350px] h-[550px] rounded-lg shadow-lg";
+    "sm:relative overflow-auto flex flex-1 flex-col justify-between sm:rounded-lg shadow-lg sm:w-[350px] sm:h-[550px]";
+
+  const mobileContainerClasses =
+    "fixed top-0 left-0 right-0 bottom-0 w-screen h-screen";
+
   return (
     <div
-      className={chatContainerClasses}
+      className={`${chatContainerClasses} ${mobileContainerClasses}`}
       style={{ backgroundColor: configDefaultStyles.appContainer.bg }}
     >
       <Header setChatIsOpen={setChatIsOpen} />
