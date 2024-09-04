@@ -5,6 +5,7 @@ import { ChatBot } from "./components";
 
 export const NewChatBot = () => {
   const [chatIsOpen, setChatIsOpen] = useState<boolean>(false);
+  const [fullScreen, setFullScreen] = useState<boolean>(true);
 
   const shouldShowOutlet = chatIsOpen;
 
@@ -14,7 +15,13 @@ export const NewChatBot = () => {
 
   return (
     <div className={`fixed bottom-[32px] right-[32px] z-50`}>
-      {shouldShowOutlet && <ChatBot setChatIsOpen={setChatIsOpen} />}
+      {shouldShowOutlet && (
+        <ChatBot
+          setChatIsOpen={setChatIsOpen}
+          setFullScreen={setFullScreen}
+          fullScreen={fullScreen}
+        />
+      )}
       <div className="fixed right-[35px] bottom-[35px] z-50">
         {!chatIsOpen && (
           <div

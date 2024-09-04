@@ -11,10 +11,10 @@ export const Button = ({
 }) => {
   // CONFIG - BUTTON STYLES
   const baseClasses =
-    "text-sm font-bold p-4 cursor-pointer transition-all w-full rounded-xl hover:scale-95";
+    "text-sm font-bold p-4 cursor-pointer transition-all w-full rounded-full hover:scale-95";
   const typeClasses = {
     outline: "text-[#fbea6a] bg-transparent border border-[#fbea6a]",
-    primary: "text-[#fbea6a] bg-[#fbea6a]",
+    primary: "text-[#0f223e] bg-[#fbea6a]",
   };
 
   return (

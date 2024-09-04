@@ -1,6 +1,13 @@
-export const ExpandIcon = ({ fill }: { fill: string }) => {
+export const ExpandIcon = ({
+  fill,
+  action,
+}: {
+  fill: string;
+  action: () => void;
+}) => {
   return (
     <svg
+      onClick={() => action()}
       className="cursor-pointer"
       xmlns="http://www.w3.org/2000/svg"
       width="16.603"

@@ -10,10 +10,12 @@ const CustomLink = ({ href, children }: any) => (
   </Link>
 );
 
-export const Messages = () => {
+export const Messages = ({ fullScreen }: { fullScreen?: boolean }) => {
   const messageStyles = {
     container: "flex-1 overflow-auto flex flex-col items-start px-4 mt-2",
-    message: "text-sm mb-2 p-2 rounded-lg max-w-[230px] shadow-md",
+    message: fullScreen
+      ? "text-sm mb-2 p-2 rounded-lg max-w-[430px] shadow-md"
+      : "text-sm mb-2 p-2 rounded-lg max-w-[230px] shadow-md",
     userMessage: "self-end",
     assistantMessage: "self-start",
     content: "font-sans text-sm leading-6 align-start",
