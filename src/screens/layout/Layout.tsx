@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { useApiAuth, useMessageService } from "../../hooks";
 import { Input } from "../../components/Input";
-import { useChatContext } from "../../context";
+import { useChatbotConfig, useChatContext } from "../../context";
 import { useScreenWidth } from "../../hooks/useScreenWitdth";
 
 export const Layout = () => {
@@ -18,6 +18,7 @@ export const Layout = () => {
 
   const isMobile = width < 645;
 
+  const { config } = useChatbotConfig();
   const [chatIsOpen, setChatIsOpen] = useState<boolean>(false);
 
   const path = pathname.split("/")[1];
@@ -96,7 +97,12 @@ export const Layout = () => {
         onTouchEnd={handleMouseLeave}
       >
         {shouldShowOutlet && (
-          <div className={`chatbot-container ${path}`}>
+          <div
+            className={`chatbot-container ${path}`}
+            style={{
+              backgroundColor: `${config?.containerColor}`,
+            }}
+          >
             <Header
               handleCancelChat={handleFinishChat}
               handleOpenChat={

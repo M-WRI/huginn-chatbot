@@ -9,8 +9,19 @@ export const Button = ({
   title?: string;
   onClick?: () => void;
 }) => {
+  const baseClasses =
+    "text-sm font-bold p-4 cursor-pointer transition-all w-full rounded-full hover:scale-95";
+  const typeClasses = {
+    outline: "text-[#fbea6a] bg-transparent border border-[#fbea6a]",
+    primary: "text-[#0f223e] bg-[#fbea6a]",
+  };
+
   return (
-    <button onClick={onClick} className={`button ${type}`} title={title}>
+    <button
+      onClick={onClick}
+      className={`${baseClasses} ${typeClasses[type]}`}
+      title={title}
+    >
       {children}
     </button>
   );

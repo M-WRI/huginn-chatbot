@@ -1,12 +1,11 @@
 import { useMutation } from "react-query";
 import { useAuthContext } from "../context";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const baseURL = process.env.REACT_APP_API_URL;
+
 export const useApiAuth = () => {
-  const navigate = useNavigate();
   const { authState, setAuthState } = useAuthContext();
-  const baseURL = process.env.REACT_APP_API_URL;
 
   const { mutate: checkIsAuth } = useMutation(
     async (chatId: string | null) => {
@@ -22,7 +21,6 @@ export const useApiAuth = () => {
           isError: false,
           state: data.message,
         });
-        navigate("/chat-bot");
       },
       onError: (error: any) => {
         setAuthState({
@@ -30,7 +28,6 @@ export const useApiAuth = () => {
           isError: true,
           state: error?.response.data.detail,
         });
-        navigate("/");
       },
     }
   );

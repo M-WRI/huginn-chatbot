@@ -62,7 +62,7 @@ export const useMessageService = () => {
               return;
             }
             if (!accumulatedContent.endsWith(value.message.content)) {
-              accumulatedContent += value.message.content; // Update the full content
+              accumulatedContent += value.message.content;
             }
 
             setPreviousChats((prevChats) => {
