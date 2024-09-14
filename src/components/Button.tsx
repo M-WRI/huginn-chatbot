@@ -9,7 +9,6 @@ export const Button = ({
   title?: string;
   onClick?: () => void;
 }) => {
-  // CONFIG - BUTTON STYLES
   const baseClasses =
     "text-sm font-bold p-4 cursor-pointer transition-all w-full rounded-full hover:scale-95";
   const typeClasses = {

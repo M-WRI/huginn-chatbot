@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { chatMock } from "../../../mocks";
 import { IMessage } from "../../../entities";
 import { configDefaultStyles } from "../../../config";
 import ReactMarkdown from "react-markdown";
 import { useChatBotState } from "../../../context";
+import { useEffect, useRef } from "react";
 
 const CustomLink = ({ href, children }: any) => (
   <Link to={href} target="_blank" rel="noopener noreferrer">
@@ -11,8 +11,9 @@ const CustomLink = ({ href, children }: any) => (
   </Link>
 );
 
-export const Messages = () => {
+export const Messages = ({ previousChats }: { previousChats: IMessage[] }) => {
   const { isFullScreen } = useChatBotState();
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const messageStyles = {
     container: "flex-1 overflow-auto flex flex-col items-start px-4 mt-2",
@@ -24,9 +25,13 @@ export const Messages = () => {
     content: "font-sans text-sm leading-6 align-start",
   };
 
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [previousChats]);
+
   return (
     <div className={messageStyles.container}>
-      {chatMock.map((chat: IMessage, i: number) => (
+      {previousChats.map((chat: IMessage, i: number) => (
         <div
           key={i}
           className={`${messageStyles.message} ${
@@ -49,6 +54,7 @@ export const Messages = () => {
           </ReactMarkdown>
         </div>
       ))}
+      <div ref={messagesEndRef} />
     </div>
   );
 };

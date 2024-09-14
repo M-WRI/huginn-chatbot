@@ -14,7 +14,6 @@ export const ChatbotConfigProvider: React.FC<{ children: React.ReactNode }> = ({
   const [config, setConfig] = useState<ChatbotConfig | null>(null);
 
   useEffect(() => {
-    console.log("Setting up event listener for chatbotConfigLoaded");
     const handleConfigLoaded = (event: Event) => {
       const customEvent = event as CustomEvent<ChatbotConfig>;
       setConfig(customEvent.detail);
