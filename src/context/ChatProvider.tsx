@@ -14,6 +14,7 @@ interface IChatContext {
   setChatId: Dispatch<SetStateAction<string | null>>;
   previousChats: IMessage[];
   setPreviousChats: Dispatch<SetStateAction<IMessage[]>>;
+  handleFinishChat: () => void;
 }
 
 interface ChatProviderProps {
@@ -31,6 +32,13 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     const storedChats = localStorage.getItem("previousChats");
     return storedChats ? JSON.parse(storedChats) : [];
   });
+
+  const handleFinishChat = () => {
+    localStorage.removeItem("chatId");
+    localStorage.removeItem("previousChats");
+    setChatId(null);
+    setPreviousChats([]);
+  };
 
   useEffect(() => {
     localStorage.setItem("chatId", chatId ?? "");
@@ -56,7 +64,13 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
   return (
     <ChatContext.Provider
-      value={{ chatId, setChatId, previousChats, setPreviousChats }}
+      value={{
+        chatId,
+        setChatId,
+        previousChats,
+        setPreviousChats,
+        handleFinishChat,
+      }}
     >
       {children}
     </ChatContext.Provider>

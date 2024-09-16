@@ -1,20 +1,14 @@
-import { HuginnIcon } from "../Icons";
-import { configDefaultStyles } from "../../config";
-import { useAuthContext, useChatBotState, useChatContext } from "../../context";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
+import { useChatBotState, useChatContext } from "../../context";
 import { useApiAuth } from "../../hooks";
+import { configDefaultStyles } from "../../config";
+import { HuginnIcon } from "../../components/Icons";
 
-export const NewChatBot = () => {
+export const ChatBotLayout = () => {
   const { chatIsOpen, setChatIsOpen } = useChatBotState();
-  const { authState } = useAuthContext();
-  const { checkIsAuth } = useApiAuth();
+  const { checkIsAuth, authState } = useApiAuth();
   const { chatId } = useChatContext();
-
-
-
-  console.log(authState, "<-------------");
-  const navigate = useNavigate();
 
   const shouldShowOutlet = chatIsOpen;
 
@@ -23,14 +17,8 @@ export const NewChatBot = () => {
   };
 
   useEffect(() => {
-    if (!chatIsOpen) {
-      navigate("/");
-    }
-  }, [chatIsOpen, navigate]);
-
-  useEffect(() => {
-    checkIsAuth(chatId);
-  }, [chatId, checkIsAuth]);
+    chatIsOpen && !authState.authHasBeenTriggered && checkIsAuth(chatId);
+  }, [chatIsOpen, authState]);
 
   return (
     <div className={`fixed bottom-[32px] right-[32px] z-50`}>

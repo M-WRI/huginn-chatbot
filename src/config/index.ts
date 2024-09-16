@@ -23,6 +23,15 @@ interface IConfigDefaultStyles {
       color: string;
     };
   };
+  button: {
+    outline: {
+      color: string;
+    };
+    primary: {
+      color: string;
+      bg: string;
+    };
+  };
 }
 
 export const configDefaultStyles: IConfigDefaultStyles = {
@@ -48,6 +57,15 @@ export const configDefaultStyles: IConfigDefaultStyles = {
     assistant: {
       bg: "#5b1c16",
       color: "#fff",
+    },
+  },
+  button: {
+    outline: {
+      color: "#fbea6a",
+    },
+    primary: {
+      color: "#0f223e",
+      bg: "#fbea6a",
     },
   },
 };

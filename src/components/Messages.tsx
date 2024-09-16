@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { IMessage } from "../../../entities";
-import { configDefaultStyles } from "../../../config";
 import ReactMarkdown from "react-markdown";
-import { useChatBotState } from "../../../context";
 import { useEffect, useRef } from "react";
+import { IMessage } from "../entities";
+import { useChatBotState } from "../context";
+import { configDefaultStyles } from "../config";
 
 const CustomLink = ({ href, children }: any) => (
   <Link to={href} target="_blank" rel="noopener noreferrer">
