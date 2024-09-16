@@ -1,3 +1,5 @@
+import { configDefaultStyles } from "../config";
+
 export const Button = ({
   type = "outline",
   children,
@@ -12,8 +14,8 @@ export const Button = ({
   const baseClasses =
     "text-sm font-bold p-4 cursor-pointer transition-all w-full rounded-full hover:scale-95";
   const typeClasses = {
-    outline: "text-[#fbea6a] bg-transparent border border-[#fbea6a]",
-    primary: "text-[#0f223e] bg-[#fbea6a]",
+    outline: "bg-transparent border border-[#fbea6a]",
+    primary: "",
   };
 
   return (
@@ -21,6 +23,14 @@ export const Button = ({
       onClick={onClick}
       className={`${baseClasses} ${typeClasses[type]}`}
       title={title}
+      style={{
+        color:
+          type === "outline"
+            ? configDefaultStyles.button.outline.color
+            : configDefaultStyles.button.primary.color,
+        backgroundColor:
+          type === "outline" ? "" : configDefaultStyles.button.primary.bg,
+      }}
     >
       {children}
     </button>

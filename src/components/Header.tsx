@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { configDefaultStyles } from "../config";
 import { useChatBotState, useChatContext } from "../context";
 import { Button } from "./Button";
@@ -7,6 +8,9 @@ export const Header = () => {
   const { setChatIsOpen, fullScreen, setFullScreen, isFullScreen, isMobile } =
     useChatBotState();
   const { handleFinishChat } = useChatContext();
+  const location = useLocation();
+
+  const isNotStartPage = location.pathname !== "/";
 
   const headerStyles = {
     container: isFullScreen
@@ -62,11 +66,13 @@ export const Header = () => {
           </div>
         ) : (
           <>
-            <CancelIcon
-              onClick={handleFinishChat}
-              fill={configDefaultStyles.header.iconColor}
-            />
-            {!isMobile && (
+            {isNotStartPage && (
+              <CancelIcon
+                onClick={handleFinishChat}
+                fill={configDefaultStyles.header.iconColor}
+              />
+            )}
+            {isNotStartPage && !isMobile && (
               <ExpandIcon
                 action={handleExpandChatBot}
                 fill={configDefaultStyles.header.iconColor}

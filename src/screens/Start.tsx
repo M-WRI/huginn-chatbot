@@ -27,8 +27,6 @@ export const Start = () => {
     navigate("/chat-bot");
   };
 
-  console.log(authState, "<------- authState");
-
   useEffect(() => {
     !authState.isError &&
       authState.authHasBeenTriggered &&
