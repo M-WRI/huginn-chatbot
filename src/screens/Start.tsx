@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { useChatContext } from "../context";
+import { useAuthContext, useChatContext } from "../context";
 // import { v4 as uuidv4 } from "uuid"; <----- to be used in the moment the backend can do that
 import { Button } from "../components/Button";
 import { HuginnIcon } from "../components/Icons";
 import { configDefaultStyles } from "../config";
-import { Header } from "../components/v2/components/Header";
+import { Header } from "../components/Header";
+import { useEffect } from "react";
 
 export const Start = () => {
   const { setChatId, setPreviousChats } = useChatContext();
+  const { authState } = useAuthContext();
   const navigate = useNavigate();
 
   const chatContainerClasses =
@@ -24,6 +26,14 @@ export const Start = () => {
     setPreviousChats([]);
     navigate("/chat-bot");
   };
+
+  console.log(authState, "<------- authState");
+
+  useEffect(() => {
+    !authState.isError &&
+      authState.authHasBeenTriggered &&
+      navigate("/chat-bot");
+  }, [authState]);
 
   return (
     <main

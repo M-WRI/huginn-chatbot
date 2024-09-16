@@ -1,12 +1,10 @@
 import { createMemoryRouter } from "react-router-dom";
-import { NewChatBot } from "../components/v2";
-import { ChatBot } from "../components/v2/components";
-import { Start } from "../screens";
+import { ChatBotLayout, Start, ChatBot } from "../screens";
 
 export const router = createMemoryRouter([
   {
     path: "/",
-    element: <NewChatBot />,
+    element: <ChatBotLayout />,
     children: [
       {
         path: "/",

@@ -1,92 +1,84 @@
-import { ReactComponent as HuginnIcon } from "../assets/huginn_logo_icon.svg";
-import { ReactComponent as ExpandIcon } from "../assets/expand_icon.svg";
-import { ReactComponent as ArrowDownIcon } from "../assets/arrow_down_icon.svg";
-import { ReactComponent as CancelIcon } from "../assets/cancel_icon.svg";
+import { configDefaultStyles } from "../config";
+import { useChatBotState, useChatContext } from "../context";
 import { Button } from "./Button";
-import { useLocation } from "react-router-dom";
-import { useScreenWidth } from "../hooks/useScreenWitdth";
-import { useChatbotConfig } from "../context";
+import { ArrowDownIcon, CancelIcon, ExpandIcon, HuginnIcon } from "./Icons";
 
-export const Header = ({
-  customClass,
-  handleOpenChat,
-  handleOpenFullWindowChat,
-  handleCancelChat,
-}: {
-  customClass?: string;
-  handleOpenChat?: () => void;
-  handleOpenFullWindowChat: () => void;
-  handleCancelChat: () => void;
-}) => {
-  const { config } = useChatbotConfig();
-  const { pathname } = useLocation();
-  const path = pathname.split("/")[1];
-  const width = useScreenWidth();
+export const Header = () => {
+  const { setChatIsOpen, fullScreen, setFullScreen, isFullScreen, isMobile } =
+    useChatBotState();
+  const { handleFinishChat } = useChatContext();
 
-  const isMobile = width < 645;
+  const headerStyles = {
+    container: isFullScreen
+      ? "flex flex-col gap-4 items-center justify-center"
+      : "flex gap-4 items-center justify-between px-4 py-4 border-b",
+    logo: isFullScreen
+      ? "flex flex-col-reverse items-center gap-4"
+      : "flex gap-4 items-center",
+    title: "font-sans text-2xl font-bold pointer-events-none",
+    navigation: "flex gap-4 items-center",
+    icon: isFullScreen ? "w-[66px] h-[66px]" : "w-[40px] h-[40px]",
+  };
 
-  console.log();
+  const handleMinimizeChatBot = () => {
+    setChatIsOpen(false);
+  };
+
+  const handleExpandChatBot = () => {
+    setFullScreen(!fullScreen);
+  };
 
   return (
-    <header
-      className={`chatbot-header ${customClass}`}
-      style={{
-        borderBottom: `1px solid ${config?.borderBottomColor}`,
-      }}
+    <div
+      className={headerStyles.container}
+      style={
+        fullScreen
+          ? { borderRight: `1px solid ${configDefaultStyles.header.border}` }
+          : { borderBottom: `1px solid ${configDefaultStyles.header.border}` }
+      }
     >
-      <div className={`chatbot-header-logo ${customClass}`}>
+      <div className={headerStyles.logo}>
         <HuginnIcon
-          className={`chatbot-header-logo-icon ${customClass} icon`}
+          fill={configDefaultStyles.header.iconColor}
+          stroke={configDefaultStyles.header.iconColor}
+          className={headerStyles.icon}
         />
-        <p className={`chatbot-header-logo-text ${customClass}`}>
-          {config?.title || "Huginn"}
+        <p
+          className={headerStyles.title}
+          style={{
+            color: configDefaultStyles.header.titleColor,
+          }}
+        >
+          {configDefaultStyles.header.title}
         </p>
       </div>
-      <div className={`chatbot-header-button ${customClass}`}>
-        {isMobile || (path.length && customClass !== "full-screen") ? (
-          <div title="Chat Beenden">
-            <CancelIcon className="icon" onClick={handleCancelChat} />
+      <div className={headerStyles.navigation}>
+        {isFullScreen ? (
+          <div className="flex flex-col gap-4">
+            <Button onClick={handleExpandChatBot}>Chat minimieren</Button>
+            <Button type="primary" onClick={handleFinishChat}>
+              Chat beenden
+            </Button>
           </div>
-        ) : null}
-        {path.length ? (
-          <>
-            {!isMobile && (
-              <>
-                {customClass === "full-screen" && !isMobile ? (
-                  <Button
-                    onClick={handleOpenFullWindowChat}
-                    type="outline"
-                    title="Chat Beenden"
-                  >
-                    Chat beenden
-                  </Button>
-                ) : (
-                  <div title="Vollbild">
-                    <ExpandIcon
-                      className="icon"
-                      onClick={handleOpenFullWindowChat}
-                    />
-                  </div>
-                )}
-              </>
-            )}
-          </>
-        ) : null}
-
-        {customClass === "full-screen" && !isMobile ? (
-          <Button
-            onClick={handleOpenChat}
-            type="primary"
-            title="Chat Minimieren"
-          >
-            Chat Fenster minimieren
-          </Button>
         ) : (
-          <div title="Chat Minimieren">
-            <ArrowDownIcon className="icon" onClick={handleOpenChat} />
-          </div>
+          <>
+            <CancelIcon
+              onClick={handleFinishChat}
+              fill={configDefaultStyles.header.iconColor}
+            />
+            {!isMobile && (
+              <ExpandIcon
+                action={handleExpandChatBot}
+                fill={configDefaultStyles.header.iconColor}
+              />
+            )}
+            <ArrowDownIcon
+              action={handleMinimizeChatBot}
+              fill={configDefaultStyles.header.iconColor}
+            />
+          </>
         )}
       </div>
-    </header>
+    </div>
   );
 };

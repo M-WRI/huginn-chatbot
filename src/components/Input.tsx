@@ -1,42 +1,59 @@
-import { ReactComponent as SendMessage } from "../assets/send_message_icon.svg";
-import { ReactComponent as LoadingIcon } from "../assets/loading_spinner_icon.svg";
+import { configDefaultStyles } from "../config";
+import { LoadingIcon, SendMessageIcon } from "./Icons";
+
 
 export const Input = ({
-  config,
+  value,
+  isLoading,
+  setValue,
+  getMessages,
 }: {
-  config: {
-    value: string;
-    isLoading: boolean;
-    setValue: (value: string) => void;
-    getMessages: () => void;
-  };
+  value: string;
+  isLoading: boolean;
+  setValue: (value: string) => void;
+  getMessages: () => void;
 }) => {
-  const { value, setValue, getMessages, isLoading } = config;
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
+  const inputStyles = {
+    container: "relative flex items-center flex-shrink-0 p-4 shadow-lg",
+    input:
+      "w-full pt-4 pr-[40px] pl-4 pb-4 ffont-sans text-sm text-white rounded-lg",
+    icon: "absolute right-6 cursor-pointer",
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !isLoading) {
       getMessages();
     }
   };
+
   return (
-    <footer className="input-container">
+    <div className={inputStyles.container}>
       <input
         type="text"
         placeholder="Schreibe eine Nachricht…"
-        className="text-input"
+        className={inputStyles.input}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onKeyDown={handleKeyPress}
-        disabled={isLoading}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setValue(e.target.value)
+        }
+        onKeyDown={handleKeyDown}
+        style={{
+          backgroundColor: configDefaultStyles.input.bg,
+          color: configDefaultStyles.input.color,
+        }}
       />
       {isLoading ? (
-        <LoadingIcon className="input-send-message loading-icon icon" />
+        <LoadingIcon
+          className={`${inputStyles.icon} animate-spin`}
+          fill={configDefaultStyles.input.iconColor}
+        />
       ) : (
-        <SendMessage
-          className="input-send-message icon"
+        <SendMessageIcon
+          className={inputStyles.icon}
+          fill={configDefaultStyles.input.iconColor}
           onClick={() => getMessages()}
         />
       )}
-    </footer>
+    </div>
   );
 };
