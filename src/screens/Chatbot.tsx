@@ -23,14 +23,14 @@ export const ChatBot = () => {
 
   useEffect(() => {
     authState.isError && !authState.authHasBeenTriggered && navigate("/");
-  }, [authState]);
+  }, [authState, navigate]);
 
   useEffect(() => {
     if (!chatId) {
       setFullScreen(false);
       navigate("/");
     }
-  }, [chatId]);
+  }, [chatId, navigate, setFullScreen]);
 
   return (
     <>
