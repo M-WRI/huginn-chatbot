@@ -1,14 +1,16 @@
 export const ArrowDownIcon = ({
   fill,
   action,
+  customClass,
 }: {
-  fill: string;
+  fill?: string;
   action: () => void;
+  customClass?: any;
 }) => {
   return (
     <svg
       onClick={() => action()}
-      className="cursor-pointer"
+      className={`cursor-pointer ${customClass}`}
       xmlns="http://www.w3.org/2000/svg"
       width="17.226"
       height="9.5"

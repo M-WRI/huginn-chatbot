@@ -3,8 +3,8 @@ export const SendMessageIcon = ({
   className,
   onClick,
 }: {
-  fill: string;
   className: string;
+  fill?: string;
   onClick: () => void;
 }) => {
   return (

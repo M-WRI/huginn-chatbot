@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "postcss-prefix-selector": "^1.16.1",
     "tailwindcss": "^3.4.10"
   }
 }

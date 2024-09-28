@@ -1,14 +1,16 @@
 export const CancelIcon = ({
   fill,
   onClick,
+  customClass,
 }: {
-  fill: string;
   onClick: () => void;
+  fill?: string;
+  customClass?: any;
 }) => {
   return (
     <svg
       onClick={() => onClick()}
-      className="cursor-pointer"
+      className={`cursor-pointer ${customClass}`}
       xmlns="http://www.w3.org/2000/svg"
       width="23.297"
       height="18.073"
