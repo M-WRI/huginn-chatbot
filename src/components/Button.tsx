@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { configDefaultStyles } from "../config";
+import { injectDynamicStyles } from "../screens";
 
 export const Button = ({
   type = "outline",
@@ -11,11 +13,15 @@ export const Button = ({
   title?: string;
   onClick?: () => void;
 }) => {
+  useEffect(() => {
+    injectDynamicStyles(configDefaultStyles);
+  }, []);
+
   const baseClasses =
-    "text-sm font-bold p-4 cursor-pointer transition-all w-full rounded-full hover:scale-95";
+    "!text-sm !font-bold !p-4 !cursor-pointer !transition-all !w-full !rounded-full !hover:scale-95";
   const typeClasses = {
-    outline: "bg-transparent border border-[#fbea6a]",
-    primary: "",
+    outline: "dynamic-button-outline",
+    primary: "dynamic-button-primary",
   };
 
   return (
@@ -23,14 +29,6 @@ export const Button = ({
       onClick={onClick}
       className={`${baseClasses} ${typeClasses[type]}`}
       title={title}
-      style={{
-        color:
-          type === "outline"
-            ? configDefaultStyles.button.outline.color
-            : configDefaultStyles.button.primary.color,
-        backgroundColor:
-          type === "outline" ? "" : configDefaultStyles.button.primary.bg,
-      }}
     >
       {children}
     </button>

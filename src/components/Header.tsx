@@ -3,6 +3,8 @@ import { configDefaultStyles } from "../config";
 import { useChatBotState, useChatContext } from "../context";
 import { Button } from "./Button";
 import { ArrowDownIcon, CancelIcon, ExpandIcon, HuginnIcon } from "./Icons";
+import { useEffect } from "react";
+import { injectDynamicStyles } from "../screens";
 
 export const Header = () => {
   const { setChatIsOpen, fullScreen, setFullScreen, isFullScreen, isMobile } =
@@ -12,16 +14,23 @@ export const Header = () => {
 
   const isNotStartPage = location.pathname !== "/";
 
+  useEffect(() => {
+    injectDynamicStyles(configDefaultStyles);
+  }, []);
+
   const headerStyles = {
     container: isFullScreen
-      ? "flex flex-col gap-4 items-center justify-center"
-      : "flex gap-4 items-center justify-between px-4 py-4 border-b",
+      ? "dynamic-header-border-right !flex !flex-col !gap-4 !items-center !justify-center"
+      : "dynamic-header-border-bottom !flex !gap-4 !items-center !justify-between !px-4 !py-4",
     logo: isFullScreen
-      ? "flex flex-col-reverse items-center gap-4"
-      : "flex gap-4 items-center",
-    title: "font-sans text-2xl font-bold pointer-events-none",
-    navigation: "flex gap-4 items-center",
-    icon: isFullScreen ? "w-[66px] h-[66px]" : "w-[40px] h-[40px]",
+      ? "!flex !flex-col-reverse !items-center !gap-4"
+      : "!flex !gap-4 !items-center",
+    title:
+      "dynamic-header-title !font-sans !text-2xl !font-bold !pointer-events-none !mb-0",
+    navigation: "!flex !gap-4 !items-center",
+    icon: isFullScreen
+      ? "dynamic-header-icon !w-[66px] !h-[66px]"
+      : "dynamic-header-icon !w-[40px] !h-[40px]",
   };
 
   const handleMinimizeChatBot = () => {
@@ -33,28 +42,10 @@ export const Header = () => {
   };
 
   return (
-    <div
-      className={headerStyles.container}
-      style={
-        fullScreen
-          ? { borderRight: `1px solid ${configDefaultStyles.header.border}` }
-          : { borderBottom: `1px solid ${configDefaultStyles.header.border}` }
-      }
-    >
+    <div className={headerStyles.container}>
       <div className={headerStyles.logo}>
-        <HuginnIcon
-          fill={configDefaultStyles.header.iconColor}
-          stroke={configDefaultStyles.header.iconColor}
-          className={headerStyles.icon}
-        />
-        <p
-          className={headerStyles.title}
-          style={{
-            color: configDefaultStyles.header.titleColor,
-          }}
-        >
-          {configDefaultStyles.header.title}
-        </p>
+        <HuginnIcon className={headerStyles.icon} />
+        <p className={headerStyles.title}>{configDefaultStyles.header.title}</p>
       </div>
       <div className={headerStyles.navigation}>
         {isFullScreen ? (
@@ -69,18 +60,18 @@ export const Header = () => {
             {isNotStartPage && (
               <CancelIcon
                 onClick={handleFinishChat}
-                fill={configDefaultStyles.header.iconColor}
+                customClass="dynamic-header-icon"
               />
             )}
             {isNotStartPage && !isMobile && (
               <ExpandIcon
                 action={handleExpandChatBot}
-                fill={configDefaultStyles.header.iconColor}
+                customClass="dynamic-header-icon"
               />
             )}
             <ArrowDownIcon
               action={handleMinimizeChatBot}
-              fill={configDefaultStyles.header.iconColor}
+              customClass="dynamic-header-icon"
             />
           </>
         )}

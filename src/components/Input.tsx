@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { configDefaultStyles } from "../config";
 import { LoadingIcon, SendMessageIcon } from "./Icons";
-
+import { injectDynamicStyles } from "../screens";
 
 export const Input = ({
   value,
@@ -13,11 +14,15 @@ export const Input = ({
   setValue: (value: string) => void;
   getMessages: () => void;
 }) => {
+  useEffect(() => {
+    injectDynamicStyles(configDefaultStyles);
+  }, []);
+
   const inputStyles = {
-    container: "relative flex items-center flex-shrink-0 p-4 shadow-lg",
+    container: "!relative !flex !items-center !flex-shrink-0 !p-4 !shadow-lg",
     input:
-      "w-full pt-4 pr-[40px] pl-4 pb-4 ffont-sans text-sm text-white rounded-lg",
-    icon: "absolute right-6 cursor-pointer",
+      "dynamic-input-field !w-full !pt-4 !pr-[40px] !m-0 !h-[52px] !pl-4 !pb-4 !font-sans !text-sm !rounded-lg",
+    icon: "dynamic-input-icon !absolute !right-6 !cursor-pointer",
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -37,22 +42,11 @@ export const Input = ({
           setValue(e.target.value)
         }
         onKeyDown={handleKeyDown}
-        style={{
-          backgroundColor: configDefaultStyles.input.bg,
-          color: configDefaultStyles.input.color,
-        }}
       />
       {isLoading ? (
-        <LoadingIcon
-          className={`${inputStyles.icon} animate-spin`}
-          fill={configDefaultStyles.input.iconColor}
-        />
+        <LoadingIcon className={`${inputStyles.icon} animate-spin`} />
       ) : (
-        <SendMessageIcon
-          className={inputStyles.icon}
-          fill={configDefaultStyles.input.iconColor}
-          onClick={() => getMessages()}
-        />
+        <SendMessageIcon className={inputStyles.icon} onClick={getMessages} />
       )}
     </div>
   );

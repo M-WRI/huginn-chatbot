@@ -6,6 +6,7 @@ import { useAuthContext, useChatBotState, useChatContext } from "../context";
 import { useMessageService } from "../hooks";
 import { configDefaultStyles } from "../config";
 import { useNavigate } from "react-router-dom";
+import { injectDynamicStyles } from "./layout";
 
 export const ChatBot = () => {
   const { isFullScreen, setFullScreen } = useChatBotState();
@@ -17,7 +18,6 @@ export const ChatBot = () => {
 
   const chatContainerClasses =
     "sm:relative overflow-auto flex flex-1 flex-col justify-between sm:rounded-lg shadow-lg sm:w-[350px] sm:h-[550px]";
-
   const mobileContainerClasses =
     "fixed top-0 left-0 right-0 bottom-0 w-screen h-screen";
 
@@ -32,11 +32,15 @@ export const ChatBot = () => {
     }
   }, [chatId, navigate, setFullScreen]);
 
+  useEffect(() => {
+    injectDynamicStyles(configDefaultStyles);
+  }, []);
+
   return (
     <>
       {isFullScreen ? (
         <div
-          className={`fixed top-0 left-0 right-0 bottom-0 w-screen h-screen`}
+          className="fixed top-0 left-0 right-0 bottom-0 w-screen h-screen"
           style={{ backgroundColor: configDefaultStyles.appContainer.bg }}
         >
           <div className="grid grid-cols-[350px_1fr] h-full">

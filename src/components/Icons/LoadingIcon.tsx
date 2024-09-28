@@ -2,8 +2,8 @@ export const LoadingIcon = ({
   fill,
   className,
 }: {
-  fill: string;
   className: string;
+  fill?: string;
 }) => {
   return (
     <svg

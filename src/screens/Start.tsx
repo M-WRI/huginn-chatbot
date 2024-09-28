@@ -6,6 +6,7 @@ import { HuginnIcon } from "../components/Icons";
 import { configDefaultStyles } from "../config";
 import { Header } from "../components/Header";
 import { useEffect } from "react";
+import { injectDynamicStyles } from "./layout";
 
 export const Start = () => {
   const { setChatId, setPreviousChats } = useChatContext();
@@ -14,7 +15,6 @@ export const Start = () => {
 
   const chatContainerClasses =
     "sm:relative overflow-auto flex flex-col sm:rounded-lg shadow-lg sm:w-[350px] sm:h-[550px]";
-
   const mobileContainerClasses =
     "fixed top-0 left-0 right-0 bottom-0 w-screen h-screen";
 
@@ -28,10 +28,14 @@ export const Start = () => {
   };
 
   useEffect(() => {
+    injectDynamicStyles(configDefaultStyles);
+  }, []);
+
+  useEffect(() => {
     !authState.isError &&
       authState.authHasBeenTriggered &&
       navigate("/chat-bot");
-  }, [authState]);
+  }, [authState, navigate]);
 
   return (
     <main
@@ -39,16 +43,20 @@ export const Start = () => {
       style={{ backgroundColor: configDefaultStyles.appContainer.bg }}
     >
       <Header />
-      <div className="m-auto flex flex-col items-center gap-4">
+      <div className="!m-auto !flex !flex-col !items-center !gap-4">
         <p
-          className="font-sans text-2xl font-bold pointer-events-none"
+          className="!font-sans !text-2xl !font-bold !pointer-events-none dynamic-header-title"
           style={{
             color: configDefaultStyles.header.titleColor,
           }}
         >
           {configDefaultStyles.header.title}
         </p>
-        <HuginnIcon fill="#FBEA6A" stroke="#FBEA6A" className="w-16 h-16" />
+        <HuginnIcon
+          fill={configDefaultStyles.header.iconColor}
+          stroke={configDefaultStyles.header.iconColor}
+          className="!w-16 !h-16 dynamic-header-icon"
+        />
         <Button type="outline" onClick={startNewChat} title="Chat Start">
           Neuen chat beginnen
         </Button>
