@@ -8,7 +8,7 @@ import { configDefaultStyles } from "../config";
 import { useNavigate } from "react-router-dom";
 import { injectDynamicStyles } from "./layout";
 
-export const ChatBot = () => {
+export const Chatbot = () => {
   const { isFullScreen, setFullScreen } = useChatBotState();
   const { chatId } = useChatContext();
   const { authState } = useAuthContext();
