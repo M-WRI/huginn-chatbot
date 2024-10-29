@@ -1,5 +1,5 @@
 import { createMemoryRouter } from "react-router-dom";
-import { ChatBotLayout, Start, ChatBot } from "../screens";
+import { Chatbot, ChatBotLayout, Start } from "../screens";
 
 export const router = createMemoryRouter([
   {
@@ -12,7 +12,7 @@ export const router = createMemoryRouter([
       },
       {
         path: "chat-bot",
-        element: <ChatBot />,
+        element: <Chatbot />,
       },
     ],
   },
