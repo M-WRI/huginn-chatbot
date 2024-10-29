@@ -14,8 +14,28 @@
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <title>Huginn</title>
+    <style>
+      input,
+      button {
+        font-size: 16px;
+      }
+      #huginn_root_container {
+        touch-action: manipulation;
+      }
+    </style>
   </head>
   <body>
     <div id="huginn_root_container"></div>
+    <script>
+      document.addEventListener(
+        "touchstart",
+        function (event) {
+          if (event.touches.length > 1) {
+            event.preventDefault();
+          }
+        },
+        { passive: false }
+      );
+    </script>
   </body>
 </html>
