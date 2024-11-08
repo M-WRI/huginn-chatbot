@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthContext, useChatContext } from "../context";
-// import { v4 as uuidv4 } from "uuid"; <----- to be used in the moment the backend can do that
+import { v4 as uuidv4 } from "uuid";
 import { Button } from "../components/Button";
 import { HuginnIcon } from "../components/Icons";
 import { configDefaultStyles } from "../config";
@@ -21,8 +21,8 @@ export const Start = () => {
   const startNewChat = () => {
     localStorage.removeItem("chatId");
     localStorage.removeItem("previousChats");
-    const newChatId = Math.floor(100000000 + Math.random() * 90000);
-    setChatId(newChatId.toString());
+    const newChatId = uuidv4(); // using uuid to generate a unique ID
+    setChatId(newChatId);
     setPreviousChats([]);
     navigate("/chat-bot");
   };

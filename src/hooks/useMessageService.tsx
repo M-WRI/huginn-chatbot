@@ -5,7 +5,10 @@ import { useMutation } from "react-query";
 
 export const useMessageService = () => {
   const baseURL = process.env.REACT_APP_API_URL;
+  
   const { chatId, previousChats, setPreviousChats } = useChatContext();
+
+  console.log("chatId:", chatId, "baseURL:", baseURL);
 
   const [value, setValue] = useState<string>("");
   const [streamLoading, setStreamLoading] = useState<boolean>(false);
