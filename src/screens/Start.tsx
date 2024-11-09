@@ -16,7 +16,7 @@ export const Start = () => {
   const chatContainerClasses =
     "sm:relative overflow-auto flex flex-col sm:rounded-lg shadow-lg sm:w-[350px] sm:h-[550px]";
   const mobileContainerClasses =
-    "fixed top-0 left-0 right-0 bottom-0 w-screen h-screen";
+    "fixed top-0 left-0 right-0 bottom-0 full-screen-container";
 
   const startNewChat = () => {
     localStorage.removeItem("chatId");
@@ -36,6 +36,8 @@ export const Start = () => {
       authState.authHasBeenTriggered &&
       navigate("/chat-bot");
   }, [authState, navigate]);
+
+  console.log("<------ start chat 5")
 
   return (
     <main

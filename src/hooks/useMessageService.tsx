@@ -8,8 +8,6 @@ export const useMessageService = () => {
   
   const { chatId, previousChats, setPreviousChats } = useChatContext();
 
-  console.log("chatId:", chatId, "baseURL:", baseURL);
-
   const [value, setValue] = useState<string>("");
   const [streamLoading, setStreamLoading] = useState<boolean>(false);
 

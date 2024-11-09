@@ -73,3 +73,8 @@
 .markdown-wrapper hr {
   @apply !border-t !my-4 !font-sans !text-left;
 }
+
+.full-screen-container {
+  height: -webkit-fill-available;
+  height: 100dvh;
+}
