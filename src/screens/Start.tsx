@@ -21,7 +21,7 @@ export const Start = () => {
   const startNewChat = () => {
     localStorage.removeItem("chatId");
     localStorage.removeItem("previousChats");
-    const newChatId = uuidv4(); // using uuid to generate a unique ID
+    const newChatId = uuidv4(); 
     setChatId(newChatId);
     setPreviousChats([]);
     navigate("/chat-bot");

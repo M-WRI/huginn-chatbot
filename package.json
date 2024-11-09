@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "PUBLIC_URL=https://huginnchatbot.blob.core.windows.net/huginncontainer/build react-app-rewired build",
+    "build": "PUBLIC_URL=https://huginnchatbot.blob.core.windows.net/hugginblobcontainer/build react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
